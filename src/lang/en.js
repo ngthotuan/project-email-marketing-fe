@@ -121,5 +121,17 @@ export default {
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
+  },
+  schedule: {
+    title: 'Schedule',
+  },
+  email: {
+    title: 'Email'
+  },
+  proxy: {
+    title: 'Proxy'
+  },
+  template: {
+    title: 'Template'
   }
 }

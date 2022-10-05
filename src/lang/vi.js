@@ -114,5 +114,17 @@ export default {
     tagsView: 'Hiện thị tab',
     fixedHeader: 'Cố định header',
     sidebarLogo: 'Hiện logo sidebar'
+  },
+  schedule: {
+    title: 'Lịch trình'
+  },
+  email: {
+    title: 'Email'
+  },
+  proxy: {
+    title: 'Proxy'
+  },
+  template: {
+    title: 'Bản mẫu'
   }
 }
