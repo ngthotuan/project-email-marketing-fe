@@ -226,8 +226,8 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = [this.$t('email.username'), this.$t('email.password')]
-        const filterVal = ['username', 'password']
+        const tHeader = [this.$t('email.email'), this.$t('email.password')]
+        const filterVal = ['email', 'password']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({
           header: tHeader,
