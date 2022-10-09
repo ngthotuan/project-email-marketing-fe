@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getEmails(query) {
   return request({
-    url: '/vue-element-admin/email/list',
+    url: '/emails',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function getEmail(id) {
 
 export function createEmail(data) {
   return request({
-    url: '/vue-element-admin/email/create',
+    url: '/emails/email',
     method: 'post',
     data
   })
@@ -26,8 +26,15 @@ export function createEmail(data) {
 
 export function updateEmail(data) {
   return request({
-    url: '/vue-element-admin/email/update',
-    method: 'post',
+    url: '/emails/email',
+    method: 'put',
     data
+  })
+}
+
+export function deleteEmail(email) {
+  return request({
+    url: `/emails/${email}`,
+    method: 'delete'
   })
 }

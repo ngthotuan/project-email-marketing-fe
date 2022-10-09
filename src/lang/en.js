@@ -70,13 +70,16 @@ export default {
   'email': {
     'title': 'Email',
     'search': 'Enter the email address to search',
-    'username': 'Username',
+    'email': 'Email',
     'password': 'Password',
     'id': 'ID',
     'actions': 'Actions',
     'validate': {
       'username': 'Please input correct email',
       'password': 'Please input password'
+    },
+    'message': {
+      'delete': 'Do you want to delete email?'
     }
   },
   'proxy': {
@@ -102,7 +105,8 @@ export default {
   'message': {
     'success': 'Success',
     'fail': 'Fail',
-    'error': 'Error'
+    'error': 'Error',
+    'confirm': 'Confirm'
   },
   'permission': {
     'addRole': 'New Role',

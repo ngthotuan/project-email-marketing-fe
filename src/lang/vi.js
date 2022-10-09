@@ -70,13 +70,16 @@ export default {
   'email': {
     'title': 'Email',
     'search': 'Nhập email để tìm kiếm',
-    'username': 'Tài khoản',
+    'email': 'Email',
     'password': 'Mật khẩu',
     'id': 'ID',
     'actions': 'Hành động',
     'validate': {
       'username': 'Vui lòng nhập đúng định dạng email',
       'password': 'Vui lòng nhập mật khẩu'
+    },
+    'message': {
+      'delete': 'Bạn có chắc chắn muốn xóa email?'
     }
   },
   'proxy': {
@@ -102,6 +105,8 @@ export default {
   'message': {
     'success': 'Thành công',
     'fail': 'Thất bại',
-    'error': 'Lỗi'
+    'error': 'Lỗi',
+    'confirm': 'Xác nhận',
+    'cancel': 'Hủy bỏ'
   }
 }

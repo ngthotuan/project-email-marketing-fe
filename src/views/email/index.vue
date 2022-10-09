@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.username" :placeholder="$t('email.search')" style="width: 500px;" class="filter-item"
+      <el-input v-model="listQuery.search" :placeholder="$t('email.search')" style="width: 500px;" class="filter-item"
                 @keyup.enter.native="handleFilter"
       />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -33,9 +33,9 @@
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('email.username')" min-width="150">
+      <el-table-column :label="$t('email.email')" min-width="150">
         <template slot-scope="{row}">
-          <span class="link-type" @click="handleUpdate(row)">{{ row.username }}</span>
+          <span class="link-type" @click="handleUpdate(row)">{{ row.email }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('email.password')" min-width="110" align="center">
@@ -63,8 +63,8 @@
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px"
                style="margin-left:50px;"
       >
-        <el-form-item :label="$t('email.username')" prop="username">
-          <el-input v-model="temp.username"/>
+        <el-form-item :label="$t('email.email')" prop="email">
+          <el-input v-model="temp.email"/>
         </el-form-item>
         <el-form-item :label="$t('email.password')" prop="password">
           <el-input v-model="temp.password"/>
@@ -84,7 +84,7 @@
 
 <script>
 import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
-import { getEmails, createEmail, updateEmail, getEmail } from '@/api/email'
+import { getEmails, createEmail, updateEmail, getEmail, deleteEmail } from '@/api/email'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -110,18 +110,18 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 10,
-        username: undefined
+        size: 10,
+        search: undefined
       },
       temp: {
-        username: '',
+        email: '',
         password: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
       rules: {
-        username: [{ required: true, message: this.$t('email.validate.username'), trigger: 'blur' }, {
+        email: [{ required: true, message: this.$t('email.validate.username'), trigger: 'blur' }, {
           type: 'email',
           message: this.$t('email.validate.username'),
           trigger: 'blur'
@@ -139,8 +139,9 @@ export default {
       try {
         this.listLoading = true
         const response = await getEmails(this.listQuery)
-        this.list = response.data.items
-        this.total = response.data.total
+        const { elements, totalElements } = response.data
+        this.list = elements
+        this.total = totalElements
       } catch (error) {
         this.$message.error(error)
       } finally {
@@ -173,13 +174,13 @@ export default {
       this.$refs['dataForm'].validate(async(valid) => {
         if (valid) {
           await createEmail(this.temp)
-          this.list.unshift(this.temp)
-          this.dialogFormVisible = false
           this.$message.success({
             message: this.$t('message.success'),
             type: 'success',
             showClose: true
           })
+          await this.getList()
+          this.dialogFormVisible = false
         }
       })
     },
@@ -208,12 +209,19 @@ export default {
       })
     },
     handleDelete(row, index) {
-      this.$message.success({
-        message: this.$t('message.success'),
-        type: 'success',
-        duration: 2000
+      console.log({
+        row,
+        index
       })
-      this.list.splice(index, 1)
+      this.$confirm(this.$t('email.message.delete'), this.$t('message.confirm'), {
+        confirmButtonText: this.$t('button.confirm'),
+        cancelButtonText: this.$t('button.cancel'),
+        type: 'warning'
+      }).then(async() => {
+        await deleteEmail(row.email)
+        await this.getList()
+      }).catch(() => {
+      })
     },
     handleDownload() {
       this.downloadLoading = true
