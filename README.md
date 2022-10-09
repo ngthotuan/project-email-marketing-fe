@@ -1,6 +1,6 @@
 ## Email Marketing Admin FrontEnd
 
-This is a simple admin frontend for email marketing. It is built with Vue and uses the [base-template](https://github.com/ngthotuan/vue-element-admin), using [be-api](https://github.com/ngthotuan/project-email-marketing-be)
+This is a simple admin frontend for email marketing, located here [email-marketing-fe](https://ngthotuan.github.io/project-email-marketing-fe). It is built with Vue and uses the [base-template](https://github.com/ngthotuan/vue-element-admin), using [be-api](https://github.com/ngthotuan/project-email-marketing-be)
 
 ## Getting started
 
