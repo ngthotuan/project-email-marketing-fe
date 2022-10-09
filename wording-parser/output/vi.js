@@ -72,7 +72,7 @@ export default {
         "search": "Nhập email để tìm kiếm",
         "email": "Email",
         "password": "Mật khẩu",
-        "id": "ID",
+        "no": "STT",
         "actions": "Hành động",
         "validate": {
             "username": "Vui lòng nhập đúng định dạng email",

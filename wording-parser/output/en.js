@@ -72,7 +72,7 @@ export default {
         "search": "Enter the email address to search",
         "email": "Email",
         "password": "Password",
-        "id": "ID",
+        "no": "ID",
         "actions": "Actions",
         "validate": {
             "username": "Please input correct email",
@@ -108,7 +108,8 @@ export default {
         "success": "Success",
         "fail": "Fail",
         "error": "Error",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "cancel": "Cancel"
     },
     "permission": {
         "addRole": "New Role",

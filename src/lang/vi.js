@@ -72,14 +72,16 @@ export default {
     'search': 'Nhập email để tìm kiếm',
     'email': 'Email',
     'password': 'Mật khẩu',
-    'id': 'ID',
+    'no': 'STT',
     'actions': 'Hành động',
     'validate': {
       'username': 'Vui lòng nhập đúng định dạng email',
       'password': 'Vui lòng nhập mật khẩu'
     },
     'message': {
-      'delete': 'Bạn có chắc chắn muốn xóa email?'
+      'delete': {
+        'title': 'Bạn có chắc chắn muốn xóa email?'
+      }
     }
   },
   'proxy': {

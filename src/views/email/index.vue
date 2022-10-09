@@ -1,19 +1,32 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.search" :placeholder="$t('email.search')" style="width: 500px;" class="filter-item"
-                @keyup.enter.native="handleFilter"
+      <el-input
+        v-model="listQuery.search"
+        :placeholder="$t('email.search')"
+        style="width: 500px;"
+        class="filter-item"
+        @keyup.enter.native="handleFilter"
       />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('button.search') }}
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit"
-                 @click="handleCreate"
+      <el-button
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="primary"
+        icon="el-icon-edit"
+        @click="handleCreate"
       >
         {{ $t('button.add') }}
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
-                 @click="handleDownload"
+      <el-button
+        v-waves
+        :loading="downloadLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
       >
         {{ $t('button.export') }}
       </el-button>
@@ -28,9 +41,9 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column :label="$t('email.id')" prop="id" align="center" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
+      <el-table-column :label="$t('email.no')" align="center" width="100">
+        <template slot-scope="{ $index}">
+          <span>{{ $index + 1 }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('email.email')" min-width="150">
@@ -55,19 +68,28 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
-                @pagination="getList"
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.size"
+      @pagination="getList"
     />
 
     <el-dialog :title="$t('dialog.' + dialogStatus)" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px"
-               style="margin-left:50px;"
+      <el-form
+        ref="dataForm"
+        :rules="rules"
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
       >
         <el-form-item :label="$t('email.email')" prop="email">
-          <el-input v-model="temp.email"/>
+          <el-input v-model="temp.email" />
         </el-form-item>
         <el-form-item :label="$t('email.password')" prop="password">
-          <el-input v-model="temp.password"/>
+          <el-input v-model="temp.password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -83,8 +105,7 @@
 </template>
 
 <script>
-import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
-import { getEmails, createEmail, updateEmail, getEmail, deleteEmail } from '@/api/email'
+import { getEmails, createEmail, updateEmail, deleteEmail } from '@/api/email'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
