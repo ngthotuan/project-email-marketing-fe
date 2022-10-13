@@ -39,7 +39,6 @@
       fit
       highlight-current-row
       style="width: 100%;"
-      @sort-change="sortChange"
     >
       <el-table-column :label="$t('email.no')" align="center" width="100">
         <template slot-scope="{ $index}">
@@ -172,10 +171,6 @@ export default {
     handleFilter() {
       this.listQuery.page = 1
       this.getList()
-    },
-    sortChange(data) {
-      const { prop, order } = data
-      console.log(prop, order)
     },
     resetTemp() {
       this.temp = {
