@@ -164,7 +164,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'index',
-        // component: () => import('@/views/email/index'),
+        component: () => import('@/views/proxy/index'),
         name: 'Proxy',
         meta: { title: 'proxy', icon: 'international', noCache: true },
         roles: ['admin'] // you can set roles in root nav

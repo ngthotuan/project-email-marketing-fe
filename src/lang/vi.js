@@ -59,7 +59,22 @@ export default {
     }
   },
   'proxy': {
-    'title': 'Proxy'
+    'title': 'Proxy',
+    'id': 'Mã',
+    'host': 'Máy chủ',
+    'port': 'Cổng',
+    'username': 'Tài khoản',
+    'password': 'Mật khẩu',
+    'actions': 'Hành động',
+    'validate': {
+      'host': 'Vui lòng nhập máy chủ',
+      'port': 'Vui lòng nhập cổng',
+      'username': 'Vui lòng nhập tài khoản',
+      'password': 'Vui lòng nhập mật khẩu'
+    },
+    'message': {
+      'delete': 'Bạn có chắc chắn muốn xóa proxy?'
+    }
   },
   'template': {
     'title': 'Bản mẫu'
