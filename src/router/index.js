@@ -82,19 +82,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/email',
-    component: Layout,
-    redirect: '/email/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/email/index'),
-        name: 'Email',
-        meta: { title: 'email', icon: 'email', noCache: true }
-      }
-    ]
-  },
-  {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
@@ -156,7 +143,62 @@ export const asyncRoutes = [
   //     }
   //   ]
   // },
-
+  {
+    path: '/schedule',
+    component: Layout,
+    redirect: '/schedule/index',
+    children: [
+      {
+        path: 'index',
+        // component: () => import('@/views/email/index'),
+        name: 'Schedule',
+        meta: { title: 'schedule', icon: 'skill', noCache: true },
+        roles: ['admin'] // you can set roles in root nav
+      }
+    ]
+  },
+  {
+    path: '/proxy',
+    component: Layout,
+    redirect: '/proxy/index',
+    children: [
+      {
+        path: 'index',
+        // component: () => import('@/views/email/index'),
+        name: 'Proxy',
+        meta: { title: 'proxy', icon: 'international', noCache: true },
+        roles: ['admin'] // you can set roles in root nav
+      }
+    ]
+  },
+  {
+    path: '/email',
+    component: Layout,
+    redirect: '/email/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/email/index'),
+        name: 'Email',
+        meta: { title: 'email', icon: 'email', noCache: true },
+        roles: ['admin'] // you can set roles in root nav
+      }
+    ]
+  },
+  {
+    path: '/template',
+    component: Layout,
+    redirect: '/template/index',
+    children: [
+      {
+        path: 'index',
+        // component: () => import('@/views/email/index'),
+        name: 'Template',
+        meta: { title: 'template', icon: 'documentation', noCache: true },
+        roles: ['admin'] // you can set roles in root nav
+      }
+    ]
+  },
   {
     path: '/icon',
     component: Layout,
@@ -166,6 +208,28 @@ export const asyncRoutes = [
         component: () => import('@/views/icons/index'),
         name: 'Icons',
         meta: { title: 'icons', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/clipboard',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/clipboard/index'),
+        name: 'ClipboardDemo',
+        meta: { title: 'clipboardDemo', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: 'external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://github.com/ngthotuan/project-email-marketing-fe',
+        meta: { title: 'externalLink', icon: 'link' }
       }
     ]
   },
@@ -242,31 +306,6 @@ export const asyncRoutes = [
   //     }
   //   ]
   // },
-
-  {
-    path: '/clipboard',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/clipboard/index'),
-        name: 'ClipboardDemo',
-        meta: { title: 'clipboardDemo', icon: 'clipboard' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/ngthotuan/project-email-marketing-fe',
-        meta: { title: 'externalLink', icon: 'link' }
-      }
-    ]
-  },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

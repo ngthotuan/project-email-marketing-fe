@@ -3,7 +3,9 @@ export default {
         "dashboard": "Bảng điều khiển",
         "profile": "Trang cá nhân",
         "email": "Email",
-        "proxy": "Proxy"
+        "proxy": "Proxy",
+        "schedule": "Lịch trình",
+        "template": "Bản mẫu"
     },
     "navbar": {
         "logOut": "Đăng xuất",

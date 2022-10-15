@@ -3,7 +3,9 @@ export default {
     'dashboard': 'Dashboard',
     'profile': 'Profile',
     'email': 'Email',
-    'proxy': 'Proxy'
+    'proxy': 'Proxy',
+    'schedule': 'Schedule',
+    'template': 'Template'
   },
   'navbar': {
     'logOut': 'Log Out',
