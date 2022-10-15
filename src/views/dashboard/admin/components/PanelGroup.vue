@@ -10,7 +10,7 @@
             <div class="card-panel-text">
               {{ $t('schedule.title') }}
             </div>
-            <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+            <count-to :start-val="0" :end-val="statistic.schedule" :duration="1500" class="card-panel-num" />
           </div>
         </router-link>
       </div>
@@ -25,7 +25,7 @@
             <div class="card-panel-text">
               {{ $t('proxy.title') }}
             </div>
-            <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+            <count-to :start-val="0" :end-val="statistic.proxy" :duration="2000" class="card-panel-num" />
           </div>
         </router-link>
       </div>
@@ -40,7 +40,7 @@
             <div class="card-panel-text">
               {{ $t('email.title') }}
             </div>
-            <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+            <count-to :start-val="0" :end-val="statistic.email" :duration="1500" class="card-panel-num" />
           </div>
         </router-link>
       </div>
@@ -55,7 +55,7 @@
             <div class="card-panel-text">
               {{ $t('template.title') }}
             </div>
-            <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+            <count-to :start-val="0" :end-val="statistic.template" :duration="2000" class="card-panel-num" />
           </div>
         </router-link>
       </div>
@@ -65,10 +65,20 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import { count } from '@/api/statistic'
 
 export default {
   components: {
     CountTo
+  },
+  data: () => ({
+    statistic: {}
+  }),
+  async created() {
+    const { statusCode, data } = await count()
+    if (statusCode && statusCode === 200) {
+      this.statistic = data
+    }
   }
 }
 </script>
