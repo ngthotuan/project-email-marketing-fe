@@ -32,7 +32,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog :title="$t('dialog.update')" :visible.sync="dialogFormVisible">
+    <el-dialog class="cron-dialog" :title="$t('dialog.update')" :visible.sync="dialogFormVisible">
       <el-form
         ref="dataForm"
         :rules="rules"
@@ -63,6 +63,12 @@
     </el-dialog>
   </div>
 </template>
+
+<style lang="scss">
+  .cron-dialog > .el-dialog {
+    width: 70% !important;
+  }
+</style>
 
 <script>
 import { getSchedules, updateSchedule } from '@/api/schedule'

@@ -6,7 +6,7 @@ This is a simple admin frontend for email marketing, located here [email-marketi
 
 ```bash
 # clone the project
-git clone https://github.com/ngthotuan/project-email-marketing-fen.git
+git clone https://github.com/ngthotuan/project-email-marketing-fe.git
 
 # enter the project directory
 cd project-email-marketing-fe
@@ -47,10 +47,3 @@ npm run lint
 # code format check and auto fix
 npm run lint -- --fix
 ```
-
-Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information
-
-
-## Online Demo
-
-[Preview](https://panjiachen.github.io/vue-element-admin)
