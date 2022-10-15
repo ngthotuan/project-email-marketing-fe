@@ -61,12 +61,14 @@ export default {
   'proxy': {
     'title': 'Proxy',
     'id': 'Mã',
+    'name': 'Tên',
     'host': 'Máy chủ',
     'port': 'Cổng',
     'username': 'Tài khoản',
     'password': 'Mật khẩu',
     'actions': 'Hành động',
     'validate': {
+      'name': 'Vui lòng nhập tên proxy',
       'host': 'Vui lòng nhập máy chủ',
       'port': 'Vui lòng nhập cổng',
       'username': 'Vui lòng nhập tài khoản',
@@ -74,7 +76,8 @@ export default {
     },
     'message': {
       'delete': 'Bạn có chắc chắn muốn xóa proxy?'
-    }
+    },
+    'search': 'Nhập tên hoặc máy chủ hoặc tài khoản để tìm kiếm'
   },
   'template': {
     'title': 'Bản mẫu'

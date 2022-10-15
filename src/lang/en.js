@@ -61,12 +61,14 @@ export default {
   'proxy': {
     'title': 'Proxy',
     'id': 'ID',
+    'name': 'Name',
     'host': 'Host',
     'port': 'Port',
     'username': 'Username',
     'password': 'Password',
     'actions': 'Actions',
     'validate': {
+      'name': 'Please input proxy name',
       'host': 'Please input host',
       'port': 'Please input port',
       'username': 'Please input username',
@@ -74,7 +76,8 @@ export default {
     },
     'message': {
       'delete': 'Do you want to delete proxy?'
-    }
+    },
+    'search': 'Input name or host or username to search'
   },
   'template': {
     'title': 'Template'

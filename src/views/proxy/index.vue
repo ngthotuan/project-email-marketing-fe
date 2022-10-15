@@ -45,6 +45,11 @@
           <span class="link-type" @click="handleUpdate(row)">{{ row.id }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('proxy.name')" min-width="150" align="center">
+        <template slot-scope="{row}">
+          <span>{{ row.name }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('proxy.host')" min-width="150" align="center">
         <template slot-scope="{row}">
           <span>{{ row.host }}</span>
@@ -94,6 +99,9 @@
         label-width="100px"
         style="margin-left:50px;"
       >
+        <el-form-item :label="$t('proxy.name')" prop="name">
+          <el-input v-model="temp.name" />
+        </el-form-item>
         <el-form-item :label="$t('proxy.host')" prop="host">
           <el-input v-model="temp.host" />
         </el-form-item>
@@ -150,13 +158,18 @@ export default {
         search: undefined
       },
       temp: {
-        email: '',
+        id: null,
+        name: '',
+        host: '',
+        port: '',
+        username: '',
         password: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
       rules: {
+        name: [{ required: true, message: this.$t('proxy.validate.name'), trigger: 'blur' }],
         host: [{ required: true, message: this.$t('proxy.validate.host'), trigger: 'blur' }],
         port: [{ required: true, message: this.$t('proxy.validate.port'), trigger: 'blur' }],
         username: [{ required: true, message: this.$t('proxy.validate.username'), trigger: 'blur' }],
@@ -188,6 +201,8 @@ export default {
     },
     resetTemp() {
       this.temp = {
+        id: null,
+        name: '',
         host: '',
         port: '',
         username: '',
@@ -241,10 +256,6 @@ export default {
       })
     },
     handleDelete(row, index) {
-      console.log({
-        row,
-        index
-      })
       this.$confirm(this.$t('proxy.message.delete'), this.$t('message.confirm'), {
         confirmButtonText: this.$t('button.confirm'),
         cancelButtonText: this.$t('button.cancel'),
@@ -258,19 +269,31 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = [this.$t('email.email'), this.$t('email.password')]
-        const filterVal = ['email', 'password']
-        const data = this.formatJson(filterVal)
+        const tb = 'proxy'
+        const headerKey = ['id',
+          'name',
+          'host',
+          'port',
+          'username',
+          'password']
+        const tHeader = this.getTHeader(tb, headerKey)
+        const data = this.getTableData(headerKey)
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: 'table-list'
+          filename: `${tb}_${Date.now()}`
         })
         this.downloadLoading = false
       })
     },
-    formatJson(filterVal) {
-      return this.list.map(v => filterVal.map(j => {
+    getTHeader(prefix, headerKey) {
+      if (headerKey) {
+        return headerKey.map(key => this.$t(`${prefix}.${key}`))
+      }
+      return []
+    },
+    getTableData(headerKey) {
+      return this.list.map(v => headerKey.map(j => {
         if (j === 'timestamp') {
           return parseTime(v[j])
         } else {

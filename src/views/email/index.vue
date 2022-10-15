@@ -242,19 +242,28 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = [this.$t('email.email'), this.$t('email.password')]
-        const filterVal = ['email', 'password']
-        const data = this.formatJson(filterVal)
+        const tb = 'email'
+        const headerKey = [
+          'email',
+          'password']
+        const tHeader = this.getTHeader(tb, headerKey)
+        const data = this.getTableData(headerKey)
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: 'table-list'
+          filename: `${tb}_${Date.now()}`
         })
         this.downloadLoading = false
       })
     },
-    formatJson(filterVal) {
-      return this.list.map(v => filterVal.map(j => {
+    getTHeader(prefix, headerKey) {
+      if (headerKey) {
+        return headerKey.map(key => this.$t(`${prefix}.${key}`))
+      }
+      return []
+    },
+    getTableData(headerKey) {
+      return this.list.map(v => headerKey.map(j => {
         if (j === 'timestamp') {
           return parseTime(v[j])
         } else {
