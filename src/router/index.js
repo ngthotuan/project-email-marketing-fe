@@ -150,7 +150,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'index',
-        // component: () => import('@/views/email/index'),
+        component: () => import('@/views/schedule/index'),
         name: 'Schedule',
         meta: { title: 'schedule', icon: 'skill', noCache: true },
         roles: ['admin'] // you can set roles in root nav

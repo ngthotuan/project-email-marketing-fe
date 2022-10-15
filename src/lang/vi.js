@@ -33,7 +33,15 @@ export default {
     'sidebarLogo': 'Hiện logo sidebar'
   },
   'schedule': {
-    'title': 'Lịch trình'
+    'title': 'Lịch trình',
+    'id': 'Mã',
+    'name': 'Tên',
+    'cron': 'Cron',
+    'actions': 'Hành động',
+    'validate': {
+      'name': 'Vui lòng nhập tên cho lịch trình',
+      'cron': 'Vui lòng chọn cú pháp lịch trình'
+    }
   },
   'email': {
     'title': 'Email',

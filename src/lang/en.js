@@ -33,7 +33,15 @@ export default {
     'sidebarLogo': 'Sidebar Logo'
   },
   'schedule': {
-    'title': 'Schedule'
+    'title': 'Schedule',
+    'id': 'ID',
+    'name': 'Name',
+    'cron': 'Cron',
+    'actions': 'Actions',
+    'validate': {
+      'name': 'Please input schedule name',
+      'cron': 'Please select schedule cron'
+    }
   },
   'email': {
     'title': 'Email',
