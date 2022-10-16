@@ -218,6 +218,20 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/schedule-run',
+    component: Layout,
+    redirect: '/schedule-run/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/schedule-run/index'),
+        name: 'ScheduleRun',
+        meta: { title: 'scheduleRun', icon: 'form', noCache: true },
+        roles: ['admin'] // you can set roles in root nav
+      }
+    ]
+  },
   // {
   //   path: '/icon',
   //   component: Layout,

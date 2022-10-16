@@ -8,7 +8,8 @@ export default {
     'template': 'Bản mẫu',
     'templateList': 'Danh sách bản mẫu',
     'createTemplate': 'Tạo bản mẫu',
-    'editTemplate': 'Sửa bản mẫu'
+    'editTemplate': 'Sửa bản mẫu',
+    'scheduleRun': 'Lịch trình chạy'
   },
   'navbar': {
     'logOut': 'Đăng xuất',
@@ -98,6 +99,9 @@ export default {
     'message': {
       'delete': 'Bạn có chắc chắn muốn xóa bản mẫu này?'
     }
+  },
+  'scheduleRun': {
+    'title': 'Lịch trình chạy'
   },
   'button': {
     'add': 'Tạo mới',

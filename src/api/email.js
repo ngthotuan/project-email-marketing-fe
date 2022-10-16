@@ -10,7 +10,7 @@ export function getEmails(query) {
 
 export function getEmail(id) {
   return request({
-    url: '/vue-element-admin/email/detail',
+    url: '/emails/email/detail',
     method: 'get',
     params: { id }
   })

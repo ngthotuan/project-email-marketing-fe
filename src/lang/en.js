@@ -8,7 +8,8 @@ export default {
     'template': 'Template',
     'templateList': 'List Template',
     'createTemplate': 'Create Template',
-    'editTemplate': 'Edit Template'
+    'editTemplate': 'Edit Template',
+    'scheduleRun': 'Schedule Run'
   },
   'navbar': {
     'logOut': 'Log Out',
@@ -98,6 +99,9 @@ export default {
     'message': {
       'delete': 'Do you want to delete this template?'
     }
+  },
+  'scheduleRun': {
+    'title': 'Schedule Run'
   },
   'button': {
     'add': 'Add',
