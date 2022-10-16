@@ -80,7 +80,21 @@ export default {
     'search': 'Input name or host or username to search'
   },
   'template': {
-    'title': 'Template'
+    'title': 'Template',
+    'search': 'Input name or subject to search',
+    'id': 'ID',
+    'name': 'Name',
+    'subject': 'Subject',
+    'content': 'Content',
+    'actions': 'Actions',
+    'validate': {
+      'name': 'Please input template name',
+      'subject': 'Please input template subject',
+      'content': 'Please input template content'
+    },
+    'message': {
+      'delete': 'Do you want to delete this template?'
+    }
   },
   'button': {
     'add': 'Add',

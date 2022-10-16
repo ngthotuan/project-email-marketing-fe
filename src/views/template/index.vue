@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-input
         v-model="listQuery.search"
-        :placeholder="$t('proxy.search')"
+        :placeholder="$t('template.search')"
         style="width: 500px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
@@ -40,37 +40,27 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column :label="$t('proxy.id')" align="center" width="100">
+      <el-table-column :label="$t('template.id')" align="center" width="100">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('proxy.name')" min-width="150" align="center">
+      <el-table-column :label="$t('template.name')" min-width="150" align="center">
         <template slot-scope="{row}">
           <span>{{ row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('proxy.host')" min-width="150" align="center">
+      <el-table-column :label="$t('template.subject')" min-width="150" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.host }}</span>
+          <span>{{ row.subject }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('proxy.port')" min-width="150" align="center">
+      <el-table-column :label="$t('template.content')" min-width="150" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.port }}</span>
+          <span>{{ row.content }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('proxy.username')" min-width="150" align="center">
-        <template slot-scope="{row}">
-          <span>{{ row.username }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('proxy.password')" min-width="150" align="center">
-        <template slot-scope="{row}">
-          <span>{{ row.password }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('proxy.actions')" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column :label="$t('template.actions')" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             {{ $t('button.edit') }}
@@ -99,20 +89,14 @@
         label-width="100px"
         style="margin-left:50px;"
       >
-        <el-form-item :label="$t('proxy.name')" prop="name">
+        <el-form-item :label="$t('template.name')" prop="name">
           <el-input v-model="temp.name" />
         </el-form-item>
-        <el-form-item :label="$t('proxy.host')" prop="host">
-          <el-input v-model="temp.host" />
+        <el-form-item :label="$t('template.subject')" prop="host">
+          <el-input v-model="temp.subject" />
         </el-form-item>
-        <el-form-item :label="$t('proxy.port')" prop="port">
-          <el-input v-model="temp.port" />
-        </el-form-item>
-        <el-form-item :label="$t('proxy.username')" prop="username">
-          <el-input v-model="temp.username" />
-        </el-form-item>
-        <el-form-item :label="$t('proxy.password')" prop="password">
-          <el-input v-model="temp.password" />
+        <el-form-item :label="$t('template.content')" prop="port">
+          <el-input v-model="temp.content" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -128,7 +112,7 @@
 </template>
 
 <script>
-import { getProxies, createProxy, updateProxy, deleteProxy } from '@/api/proxy'
+import { getTemplates, createTemplate, updateTemplate, deleteTemplate } from '@/api/template'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -160,20 +144,16 @@ export default {
       temp: {
         id: null,
         name: '',
-        host: '',
-        port: '',
-        username: '',
-        password: ''
+        subject: '',
+        content: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
       rules: {
-        name: [{ required: true, message: this.$t('proxy.validate.name'), trigger: 'blur' }],
-        host: [{ required: true, message: this.$t('proxy.validate.host'), trigger: 'blur' }],
-        port: [{ required: true, message: this.$t('proxy.validate.port'), trigger: 'blur' }],
-        username: [{ required: true, message: this.$t('proxy.validate.username'), trigger: 'blur' }],
-        password: [{ required: true, message: this.$t('proxy.validate.password'), trigger: 'blur' }]
+        name: [{ required: true, message: this.$t('template.validate.name'), trigger: 'blur' }],
+        subject: [{ required: true, message: this.$t('template.validate.subject'), trigger: 'blur' }],
+        content: [{ required: true, message: this.$t('template.validate.content'), trigger: 'blur' }]
       },
       downloadLoading: false
     }
@@ -185,7 +165,7 @@ export default {
     async getList() {
       try {
         this.listLoading = true
-        const response = await getProxies(this.listQuery)
+        const response = await getTemplates(this.listQuery)
         const { elements, totalElements } = response.data
         this.list = elements
         this.total = totalElements
@@ -203,10 +183,8 @@ export default {
       this.temp = {
         id: null,
         name: '',
-        host: '',
-        port: '',
-        username: '',
-        password: ''
+        subject: '',
+        content: ''
       }
     },
     handleCreate() {
@@ -220,7 +198,7 @@ export default {
     createData() {
       this.$refs['dataForm'].validate(async(valid) => {
         if (valid) {
-          await createProxy(this.temp)
+          await createTemplate(this.temp)
           this.$message.success({
             message: this.$t('message.success'),
             type: 'success',
@@ -243,7 +221,7 @@ export default {
       this.$refs['dataForm'].validate(async(valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          await updateProxy(tempData)
+          await updateTemplate(tempData)
           const index = this.list.findIndex(v => v.id === this.temp.id)
           this.list.splice(index, 1, this.temp)
           this.dialogFormVisible = false
@@ -256,12 +234,12 @@ export default {
       })
     },
     handleDelete(row, index) {
-      this.$confirm(this.$t('proxy.message.delete'), this.$t('message.confirm'), {
+      this.$confirm(this.$t('template.message.delete'), this.$t('message.confirm'), {
         confirmButtonText: this.$t('button.confirm'),
         cancelButtonText: this.$t('button.cancel'),
         type: 'warning'
       }).then(async() => {
-        await deleteProxy(row.id)
+        await deleteTemplate(row.id)
         await this.getList()
       }).catch(() => {
       })
@@ -269,13 +247,11 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tb = 'proxy'
+        const tb = 'template'
         const headerKey = ['id',
           'name',
-          'host',
-          'port',
-          'username',
-          'password']
+          'subject',
+          'content']
         const tHeader = this.getTHeader(tb, headerKey)
         const data = this.getTableData(headerKey)
         excel.export_json_to_excel({

@@ -80,7 +80,21 @@ export default {
     'search': 'Nhập tên hoặc máy chủ hoặc tài khoản để tìm kiếm'
   },
   'template': {
-    'title': 'Bản mẫu'
+    'title': 'Bản mẫu',
+    'search': 'Nhập tên hoặc chủ đề để tìm kiếm',
+    'id': 'Mã',
+    'name': 'Tên',
+    'subject': 'Chủ đề',
+    'content': 'Nội dung',
+    'actions': 'Hành động',
+    'validate': {
+      'name': 'Vui lòng nhập tên của bản mẫu',
+      'subject': 'Vui lòng nhập chủ đề của bản mẫu',
+      'content': 'Vui lòng nhập nội dung của bản mẫu'
+    },
+    'message': {
+      'delete': 'Bạn có chắc chắn muốn xóa bản mẫu này?'
+    }
   },
   'button': {
     'add': 'Tạo mới',
