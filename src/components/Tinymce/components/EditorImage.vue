@@ -12,6 +12,7 @@
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
+        accept="image/*"
         action="https://httpbin.org/post"
         list-type="picture-card"
       >
