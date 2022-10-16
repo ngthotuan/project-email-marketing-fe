@@ -5,7 +5,10 @@ export default {
         "email": "Email",
         "proxy": "Proxy",
         "schedule": "Schedule",
-        "template": "Template"
+        "template": "Template",
+        "templateList": "List Template",
+        "createTemplate": "Create Template",
+        "editTemplate": "Edit Template"
     },
     "navbar": {
         "logOut": "Log Out",

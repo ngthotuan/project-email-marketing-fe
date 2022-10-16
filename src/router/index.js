@@ -188,13 +188,32 @@ export const asyncRoutes = [
   {
     path: '/template',
     component: Layout,
-    redirect: '/template/index',
+    redirect: '/template/list',
+    name: 'Template',
+    meta: {
+      title: 'template',
+      icon: 'documentation'
+    },
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/template/index'),
+        path: 'create',
+        component: () => import('@/views/template/create'),
+        name: 'CreateTemplate',
+        meta: { title: 'createTemplate', icon: 'edit' },
+        roles: ['admin'] // you can set roles in root nav
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/template/edit'),
+        name: 'EditTemplate',
+        meta: { title: 'editTemplate', noCache: true, activeMenu: '/template/list' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/template/list'),
         name: 'Template',
-        meta: { title: 'template', icon: 'documentation', noCache: true },
+        meta: { title: 'templateList', icon: 'documentation', noCache: true },
         roles: ['admin'] // you can set roles in root nav
       }
     ]

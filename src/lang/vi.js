@@ -5,7 +5,10 @@ export default {
     'email': 'Email',
     'proxy': 'Proxy',
     'schedule': 'Lịch trình',
-    'template': 'Bản mẫu'
+    'template': 'Bản mẫu',
+    'templateList': 'Danh sách bản mẫu',
+    'createTemplate': 'Tạo bản mẫu',
+    'editTemplate': 'Sửa bản mẫu'
   },
   'navbar': {
     'logOut': 'Đăng xuất',

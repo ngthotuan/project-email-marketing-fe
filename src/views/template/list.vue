@@ -11,18 +11,20 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('button.search') }}
       </el-button>
-      <el-button
-        class="filter-item"
-        style="margin-left: 10px;"
-        type="primary"
-        icon="el-icon-edit"
-        @click="handleCreate"
-      >
-        {{ $t('button.add') }}
-      </el-button>
+      <router-link :to="'/template/create'" class="link-type">
+        <el-button
+          class="filter-item"
+          style="margin-left: 10px;"
+          type="primary"
+          icon="el-icon-edit"
+        >
+          {{ $t('button.add') }}
+        </el-button>
+      </router-link>
       <el-button
         v-waves
         :loading="downloadLoading"
+        style="margin-left: 10px;"
         class="filter-item"
         type="primary"
         icon="el-icon-download"
@@ -42,12 +44,16 @@
     >
       <el-table-column :label="$t('template.id')" align="center" width="100">
         <template slot-scope="{row}">
-          <span class="link-type" @click="handleUpdate(row)">{{ row.id }}</span>
+          <router-link :to="'/template/edit/'+row.id" class="link-type">
+            <span>{{ row.id }}</span>
+          </router-link>
         </template>
       </el-table-column>
       <el-table-column :label="$t('template.name')" min-width="150" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.name }}</span>
+          <router-link :to="'/template/edit/'+row.id" class="link-type">
+            <span>{{ row.name }}</span>
+          </router-link>
         </template>
       </el-table-column>
       <el-table-column :label="$t('template.subject')" min-width="150" align="center">
@@ -55,16 +61,18 @@
           <span>{{ row.subject }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('template.content')" min-width="150" align="center">
-        <template slot-scope="{row}">
-          <span>{{ row.content }}</span>
-        </template>
-      </el-table-column>
+      <!--      <el-table-column :label="$t('template.content')" min-width="150" align="center">-->
+      <!--        <template slot-scope="{row}">-->
+      <!--          <span>{{ row.content }}</span>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
       <el-table-column :label="$t('template.actions')" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            {{ $t('button.edit') }}
-          </el-button>
+          <router-link :to="'/template/edit/'+row.id">
+            <el-button type="primary" size="mini">
+              {{ $t('button.edit') }}
+            </el-button>
+          </router-link>
           <el-button size="mini" type="danger" @click="handleDelete(row,$index)">
             {{ $t('button.delete') }}
           </el-button>
@@ -79,40 +87,11 @@
       :limit.sync="listQuery.size"
       @pagination="getList"
     />
-
-    <el-dialog :title="$t('dialog.' + dialogStatus)" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="dataForm"
-        :rules="rules"
-        :model="temp"
-        label-position="left"
-        label-width="100px"
-        style="margin-left:50px;"
-      >
-        <el-form-item :label="$t('template.name')" prop="name">
-          <el-input v-model="temp.name" />
-        </el-form-item>
-        <el-form-item :label="$t('template.subject')" prop="host">
-          <el-input v-model="temp.subject" />
-        </el-form-item>
-        <el-form-item :label="$t('template.content')" prop="port">
-          <el-input v-model="temp.content" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          {{ $t('button.cancel') }}
-        </el-button>
-        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-          {{ $t('button.confirm') }}
-        </el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getTemplates, createTemplate, updateTemplate, deleteTemplate } from '@/api/template'
+import { getTemplates, deleteTemplate } from '@/api/template'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -121,16 +100,6 @@ export default {
   name: 'ComplexTable',
   components: { Pagination },
   directives: { waves },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
       list: null,
@@ -140,20 +109,6 @@ export default {
         page: 1,
         size: 10,
         search: undefined
-      },
-      temp: {
-        id: null,
-        name: '',
-        subject: '',
-        content: ''
-      },
-      dialogFormVisible: false,
-      dialogStatus: '',
-      dialogPvVisible: false,
-      rules: {
-        name: [{ required: true, message: this.$t('template.validate.name'), trigger: 'blur' }],
-        subject: [{ required: true, message: this.$t('template.validate.subject'), trigger: 'blur' }],
-        content: [{ required: true, message: this.$t('template.validate.content'), trigger: 'blur' }]
       },
       downloadLoading: false
     }
@@ -178,60 +133,6 @@ export default {
     handleFilter() {
       this.listQuery.page = 1
       this.getList()
-    },
-    resetTemp() {
-      this.temp = {
-        id: null,
-        name: '',
-        subject: '',
-        content: ''
-      }
-    },
-    handleCreate() {
-      this.resetTemp()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    createData() {
-      this.$refs['dataForm'].validate(async(valid) => {
-        if (valid) {
-          await createTemplate(this.temp)
-          this.$message.success({
-            message: this.$t('message.success'),
-            type: 'success',
-            showClose: true
-          })
-          await this.getList()
-          this.dialogFormVisible = false
-        }
-      })
-    },
-    handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    updateData() {
-      this.$refs['dataForm'].validate(async(valid) => {
-        if (valid) {
-          const tempData = Object.assign({}, this.temp)
-          await updateTemplate(tempData)
-          const index = this.list.findIndex(v => v.id === this.temp.id)
-          this.list.splice(index, 1, this.temp)
-          this.dialogFormVisible = false
-          this.$message.success({
-            message: this.$t('message.success'),
-            type: 'success',
-            showClose: true
-          })
-        }
-      })
     },
     handleDelete(row, index) {
       this.$confirm(this.$t('template.message.delete'), this.$t('message.confirm'), {

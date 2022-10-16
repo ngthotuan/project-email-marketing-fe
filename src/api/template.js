@@ -10,9 +10,8 @@ export function getTemplates(query) {
 
 export function getTemplate(id) {
   return request({
-    url: '/templates/detail',
-    method: 'get',
-    params: { id }
+    url: `/templates/${id}`,
+    method: 'get'
   })
 }
 
