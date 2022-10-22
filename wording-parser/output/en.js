@@ -56,11 +56,20 @@ export default {
         "actions": "Actions",
         "validate": {
             "username": "Please input correct email",
-            "password": "Please input password"
+            "password": "Please input password",
+            "proxy": "Please select proxy"
         },
         "message": {
             "delete": "Do you want to delete email?"
-        }
+        },
+        "proxyId": "ID",
+        "proxyName": "Name",
+        "proxyHost": "Host",
+        "proxyPort": "Port",
+        "proxyUsername": "Username",
+        "proxyPassword": "Password",
+        "proxy": "Proxy",
+        "proxyInfo": "Proxy Info"
     },
     "proxy": {
         "title": "Proxy",
@@ -104,6 +113,7 @@ export default {
         "title": "Schedule Run"
     },
     "button": {
+        "close": "Close",
         "add": "Add",
         "update": "Update",
         "edit": "Edit",

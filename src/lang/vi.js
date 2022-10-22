@@ -56,11 +56,20 @@ export default {
     'actions': 'Hành động',
     'validate': {
       'username': 'Vui lòng nhập đúng định dạng email',
-      'password': 'Vui lòng nhập mật khẩu'
+      'password': 'Vui lòng nhập mật khẩu',
+      'proxy': 'Vui lòng chọn proxy'
     },
     'message': {
       'delete': 'Bạn có chắc chắn muốn xóa email?'
-    }
+    },
+    'proxyId': 'Mã',
+    'proxyName': 'Tên',
+    'proxyHost': 'Máy chủ',
+    'proxyPort': 'Cổng',
+    'proxyUsername': 'Tài khoản',
+    'proxyPassword': 'Mật khẩu',
+    'proxy': 'Proxy',
+    'proxyInfo': 'Thông tin Proxy'
   },
   'proxy': {
     'title': 'Proxy',
@@ -104,6 +113,7 @@ export default {
     'title': 'Lịch trình chạy'
   },
   'button': {
+    'close': 'Đóng',
     'add': 'Tạo mới',
     'update': 'Cập nhật',
     'edit': 'Sửa',

@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function getAllProxies() {
+  return request({
+    url: '/proxies/',
+    method: 'get'
+  })
+}
+
 export function getProxies(query) {
   return request({
     url: '/proxies',

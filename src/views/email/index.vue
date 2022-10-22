@@ -45,7 +45,7 @@
           <span>{{ $index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('email.email')" min-width="150">
+      <el-table-column :label="$t('email.email')" align="center" min-width="150">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.email }}</span>
         </template>
@@ -53,6 +53,11 @@
       <el-table-column :label="$t('email.password')" min-width="110" align="center">
         <template slot-scope="{row}">
           <span>{{ row.password }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('email.proxy')" min-width="110" align="center">
+        <template slot-scope="{row}">
+          <span class="link-type" @click="showProxy(row)">{{ row.proxyId }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('email.actions')" align="center" width="230" class-name="small-padding fixed-width">
@@ -90,6 +95,16 @@
         <el-form-item :label="$t('email.password')" prop="password">
           <el-input v-model="temp.password" />
         </el-form-item>
+        <el-form-item :label="$t('email.proxy')" prop="proxyId">
+          <el-select v-model="temp.proxyId" style="width: 100%" filterable>
+            <el-option
+              v-for="item in listProxies"
+              :key="item.id"
+              :label="`${item.id} - ${item.name}`"
+              :value="item.id"
+            />
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
@@ -100,11 +115,46 @@
         </el-button>
       </div>
     </el-dialog>
+
+    <el-dialog :title="$t('email.proxyInfo')" :visible.sync="dialogProxy">
+      <el-form
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
+        disabled
+      >
+        <el-form-item :label="$t('email.proxyId')" prop="proxyId">
+          <el-input v-model="temp.proxyId" />
+        </el-form-item>
+        <el-form-item :label="$t('email.proxyName')" prop="proxyName">
+          <el-input v-model="temp.proxyName" />
+        </el-form-item>
+        <el-form-item :label="$t('email.proxyHost')" prop="proxyHost">
+          <el-input v-model="temp.proxyHost" />
+        </el-form-item>
+        <el-form-item :label="$t('email.proxyPort')" prop="proxyPort">
+          <el-input v-model="temp.proxyPort" />
+        </el-form-item>
+        <el-form-item :label="$t('email.proxyUsername')" prop="proxyUsername">
+          <el-input v-model="temp.proxyUsername" />
+        </el-form-item>
+        <el-form-item :label="$t('email.proxyPassword')" prop="proxyPassword">
+          <el-input v-model="temp.proxyPassword" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogProxy = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getEmails, createEmail, updateEmail, deleteEmail } from '@/api/email'
+import { getAllProxies } from '@/api/proxy'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -133,10 +183,13 @@ export default {
         size: 10,
         search: undefined
       },
+      listProxies: [],
       temp: {
         email: '',
-        password: ''
+        password: '',
+        proxyId: null
       },
+      dialogProxy: false,
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
@@ -146,13 +199,15 @@ export default {
           message: this.$t('email.validate.username'),
           trigger: 'blur'
         }],
-        password: [{ required: true, message: this.$t('email.validate.password'), trigger: 'blur' }]
+        password: [{ required: true, message: this.$t('email.validate.password'), trigger: 'blur' }],
+        proxyId: [{ required: true, message: this.$t('email.validate.proxy'), trigger: 'blur' }]
       },
       downloadLoading: false
     }
   },
   created() {
     this.getList()
+    this.getProxies()
   },
   methods: {
     async getList() {
@@ -167,6 +222,11 @@ export default {
       } finally {
         this.listLoading = false
       }
+    },
+    getProxies() {
+      getAllProxies().then(response => {
+        this.listProxies = response.data
+      })
     },
     handleFilter() {
       this.listQuery.page = 1
@@ -208,6 +268,10 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
+    showProxy(row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.dialogProxy = true
+    },
     updateData() {
       this.$refs['dataForm'].validate(async(valid) => {
         if (valid) {
@@ -245,9 +309,11 @@ export default {
         const tb = 'email'
         const headerKey = [
           'email',
-          'password']
+          'password',
+          'proxy'
+        ]
         const tHeader = this.getTHeader(tb, headerKey)
-        const data = this.getTableData(headerKey)
+        const data = this.getTableData(['email', 'password', 'proxyId'])
         excel.export_json_to_excel({
           header: tHeader,
           data,
