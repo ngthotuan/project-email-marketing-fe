@@ -57,7 +57,7 @@
       </el-table-column>
       <el-table-column :label="$t('email.proxy')" min-width="110" align="center">
         <template slot-scope="{row}">
-          <span class="link-type" @click="showProxy(row)">{{ row.proxyId }}</span>
+          <span class="link-type" @click="showProxy(row)">{{ `${row.proxyId} (${row.proxyName})` }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('email.actions')" align="center" width="230" class-name="small-padding fixed-width">
