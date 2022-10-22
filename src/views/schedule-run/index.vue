@@ -20,16 +20,16 @@
       >
         {{ $t('button.add') }}
       </el-button>
-      <el-button
-        v-waves
-        :loading="downloadLoading"
-        class="filter-item"
-        type="primary"
-        icon="el-icon-download"
-        @click="handleDownload"
-      >
-        {{ $t('button.export') }}
-      </el-button>
+      <!--      <el-button-->
+      <!--        v-waves-->
+      <!--        :loading="downloadLoading"-->
+      <!--        class="filter-item"-->
+      <!--        type="primary"-->
+      <!--        icon="el-icon-download"-->
+      <!--        @click="handleDownload"-->
+      <!--      >-->
+      <!--        {{ $t('button.export') }}-->
+      <!--      </el-button>-->
     </div>
 
     <el-table
@@ -47,7 +47,7 @@
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.email')" min-width="120" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.email.email }}</span>
+          <span class="link-type" @click="showEmail(row)">{{ row.email.email }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.emailTos')" min-width="220" align="center">
@@ -57,17 +57,17 @@
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.proxy')" min-width="120" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.proxy.name }}</span>
+          <span class="link-type" @click="showProxy(row)">{{ row.proxy.name }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.schedule')" min-width="150" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.schedule.name }}</span>
+          <span class="link-type" @click="showSchedule(row)">{{ row.schedule.name }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.template')" min-width="100" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.template.name }}</span>
+          <span class="link-type" @click="showTemplate(row)">{{ row.template.name }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.enable')" min-width="80" align="center">
@@ -156,6 +156,109 @@
         </el-button>
       </div>
     </el-dialog>
+
+    <el-dialog :title="$t('scheduleRun.email')" :visible.sync="dialogEmailVisible">
+      <el-form
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
+        disabled
+      >
+        <el-form-item :label="$t('email.email')" prop="email">
+          <el-input v-model="temp.email" />
+        </el-form-item>
+        <el-form-item :label="$t('email.password')" prop="password">
+          <el-input v-model="temp.password" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogEmailVisible = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :title="$t('scheduleRun.proxy')" :visible.sync="dialogProxyVisible">
+      <el-form
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
+        disabled
+      >
+        <el-form-item :label="$t('proxy.id')" prop="proxyId">
+          <el-input v-model="temp.proxyId" />
+        </el-form-item>
+        <el-form-item :label="$t('proxy.name')" prop="proxyName">
+          <el-input v-model="temp.proxyName" />
+        </el-form-item>
+        <el-form-item :label="$t('proxy.host')" prop="proxyHost">
+          <el-input v-model="temp.proxyHost" />
+        </el-form-item>
+        <el-form-item :label="$t('proxy.port')" prop="proxyPort">
+          <el-input v-model="temp.proxyPort" />
+        </el-form-item>
+        <el-form-item :label="$t('proxy.username')" prop="proxyUsername">
+          <el-input v-model="temp.proxyUsername" />
+        </el-form-item>
+        <el-form-item :label="$t('proxy.password')" prop="proxyPassword">
+          <el-input v-model="temp.proxyPassword" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogProxyVisible = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :title="$t('scheduleRun.schedule')" :visible.sync="dialogScheduleVisible">
+      <el-form
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
+        disabled
+      >
+        <el-form-item :label="$t('schedule.name')" prop="name">
+          <el-input v-model="temp.name" />
+        </el-form-item>
+        <el-form-item :label="$t('schedule.cron')" prop="cron">
+          <el-input v-model="temp.cron" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogScheduleVisible = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :title="$t('scheduleRun.template')" :visible.sync="dialogTemplateVisible">
+      <el-form
+        :model="temp"
+        label-position="left"
+        label-width="100px"
+        style="margin-left:50px;"
+        disabled
+      >
+        <el-form-item :label="$t('template.name')" prop="name">
+          <el-input v-model="temp.name" />
+        </el-form-item>
+        <el-form-item :label="$t('template.subject')" prop="subject">
+          <el-input v-model="temp.subject" />
+        </el-form-item>
+        <el-form-item :label="$t('template.content')" prop="content">
+          <el-input v-html="temp.content" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogTemplateVisible = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -195,6 +298,10 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
+      dialogEmailVisible: false,
+      dialogProxyVisible: false,
+      dialogTemplateVisible: false,
+      dialogScheduleVisible: false,
       rules: {
         email: [{ required: true, message: this.$t('scheduleRun.validate.email'), trigger: 'blur' }],
         emailTos: [{ required: true, message: this.$t('scheduleRun.validate.emailTos'), trigger: 'blur' }],
@@ -297,6 +404,30 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
+    },
+    showEmail(row) {
+      this.dialogEmailVisible = true
+      this.temp = {
+        ...row.email
+      }
+    },
+    showProxy(row) {
+      this.dialogProxyVisible = true
+      this.temp = {
+        ...row.email
+      }
+    },
+    showTemplate(row) {
+      this.dialogTemplateVisible = true
+      this.temp = {
+        ...row.template
+      }
+    },
+    showSchedule(row) {
+      this.dialogScheduleVisible = true
+      this.temp = {
+        ...row.schedule
+      }
     },
     updateData() {
       this.$refs['dataForm'].validate(async(valid) => {
