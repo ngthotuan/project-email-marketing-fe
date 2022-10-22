@@ -110,7 +110,16 @@ export default {
     }
   },
   'scheduleRun': {
-    'title': 'Lịch trình chạy'
+    'title': 'Lịch trình chạy',
+    'search': 'Nhập email hoặc tên bản mẫu để tìm kiếm',
+    'id': 'Mã',
+    'email': 'Email',
+    'emailTos': 'Gửi tới',
+    'proxy': 'Proxy',
+    'schedule': 'Lịch trình',
+    'template': 'Bản mẫu',
+    'enable': 'Trạng thái',
+    'actions': 'Hành động'
   },
   'button': {
     'close': 'Đóng',

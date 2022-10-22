@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
-export function getAllScheduleRun() {
+export function getAllScheduleRun(query) {
   return request({
     url: '/schedules-cronjobs',
-    method: 'get'
+    method: 'get',
+    params: query
   })
 }
 
@@ -35,5 +36,19 @@ export function deleteScheduleRun(id) {
   return request({
     url: `/schedules-cronjobs/${id}`,
     method: 'delete'
+  })
+}
+
+export function disableScheduleRun(id) {
+  return request({
+    url: `/schedules-cronjobs/${id}/disable`,
+    method: 'put'
+  })
+}
+
+export function enableScheduleRun(id) {
+  return request({
+    url: `/schedules-cronjobs/${id}/enable`,
+    method: 'put'
   })
 }

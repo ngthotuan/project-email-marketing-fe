@@ -110,7 +110,16 @@ export default {
     }
   },
   'scheduleRun': {
-    'title': 'Schedule Run'
+    'title': 'Schedule Run',
+    'search': 'Input email or template name to search',
+    'id': 'ID',
+    'email': 'Email',
+    'emailTos': 'To',
+    'proxy': 'Proxy',
+    'schedule': 'Schedule',
+    'template': 'Template',
+    'enable': 'Enable',
+    'actions': 'Actions'
   },
   'button': {
     'close': 'Close',
