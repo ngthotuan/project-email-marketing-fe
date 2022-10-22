@@ -41,14 +41,14 @@ export function deleteScheduleRun(id) {
 
 export function disableScheduleRun(id) {
   return request({
-    url: `/schedules-cronjobs/${id}/disable`,
+    url: `/schedules-cronjobs/schedules-cronjob/${id}/disable`,
     method: 'put'
   })
 }
 
 export function enableScheduleRun(id) {
   return request({
-    url: `/schedules-cronjobs/${id}/enable`,
+    url: `/schedules-cronjobs/schedules-cronjob/${id}/enable`,
     method: 'put'
   })
 }

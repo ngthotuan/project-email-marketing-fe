@@ -119,7 +119,14 @@ export default {
     'schedule': 'Lịch trình',
     'template': 'Bản mẫu',
     'enable': 'Trạng thái',
-    'actions': 'Hành động'
+    'status': {
+      'false': 'Tắt',
+      'true': 'Bật'
+    },
+    'actions': 'Hành động',
+    'message': {
+      'modifyStatus': 'Bạn có thật sự muốn thay đổi trạng thái?'
+    }
   },
   'button': {
     'close': 'Đóng',

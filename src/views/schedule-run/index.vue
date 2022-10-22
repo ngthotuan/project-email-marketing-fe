@@ -40,22 +40,22 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column :label="$t('scheduleRun.id')" align="center" width="100">
+      <el-table-column :label="$t('scheduleRun.id')" align="center" width="70">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('scheduleRun.email')" min-width="150" align="center">
+      <el-table-column :label="$t('scheduleRun.email')" min-width="120" align="center">
         <template slot-scope="{row}">
           <span>{{ row.email.email }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('scheduleRun.emailTos')" min-width="150" align="center">
+      <el-table-column :label="$t('scheduleRun.emailTos')" min-width="220" align="center">
         <template slot-scope="{row}">
           <span>{{ row.emailTos }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('scheduleRun.proxy')" min-width="150" align="center">
+      <el-table-column :label="$t('scheduleRun.proxy')" min-width="120" align="center">
         <template slot-scope="{row}">
           <span>{{ row.proxy.name }}</span>
         </template>
@@ -65,18 +65,27 @@
           <span>{{ row.schedule.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('scheduleRun.template')" min-width="150" align="center">
+      <el-table-column :label="$t('scheduleRun.template')" min-width="100" align="center">
         <template slot-scope="{row}">
           <span>{{ row.template.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('scheduleRun.enable')" min-width="150" align="center">
+      <el-table-column :label="$t('scheduleRun.enable')" min-width="80" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.enable }}</span>
+          <el-tag
+            size="medium"
+            :type="row.enable ? 'success' : 'danger'"
+          >{{ $t('scheduleRun.status.' + row.enable) }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.actions')" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
+          <el-button v-if="row.enable" size="mini" type="warning" @click="handleModifyStatus(row)">
+            {{ $t('scheduleRun.status.false') }}
+          </el-button>
+          <el-button v-else size="mini" type="success" @click="handleModifyStatus(row)">
+            {{ $t('scheduleRun.status.true') }}
+          </el-button>
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             {{ $t('button.edit') }}
           </el-button>
@@ -104,20 +113,38 @@
         label-width="100px"
         style="margin-left:50px;"
       >
-        <el-form-item :label="$t('scheduleRun.name')" prop="name">
-          <el-input v-model="temp.name" />
+        <el-form-item :label="$t('scheduleRun.email')" prop="email">
+          <el-select v-model="temp.email" style="width: 100%" filterable>
+            <el-option
+              v-for="item in emails"
+              :key="item.email"
+              :label="item.email"
+              :value="item.email"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item :label="$t('scheduleRun.host')" prop="host">
-          <el-input v-model="temp.host" />
+        <el-form-item :label="$t('scheduleRun.emailTos')" prop="emailTos">
+          <el-input v-model="temp.emailTos" style="width: 100%" :autosize="{ minRows: 2, maxRows: 4}" type="textarea" />
         </el-form-item>
-        <el-form-item :label="$t('scheduleRun.port')" prop="port">
-          <el-input v-model="temp.port" />
+        <el-form-item :label="$t('scheduleRun.schedule')" prop="scheduleId">
+          <el-select v-model="temp.scheduleId" style="width: 100%" filterable>
+            <el-option
+              v-for="item in schedules"
+              :key="item.id"
+              :label="`${item.id} - ${item.name}`"
+              :value="item.id"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item :label="$t('scheduleRun.username')" prop="username">
-          <el-input v-model="temp.username" />
-        </el-form-item>
-        <el-form-item :label="$t('scheduleRun.password')" prop="password">
-          <el-input v-model="temp.password" />
+        <el-form-item :label="$t('scheduleRun.template')" prop="templateId">
+          <el-select v-model="temp.templateId" style="width: 100%" filterable>
+            <el-option
+              v-for="item in templates"
+              :key="item.id"
+              :label="`${item.id} - ${item.name}`"
+              :value="item.id"
+            />
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -133,7 +160,10 @@
 </template>
 
 <script>
-import { getAllScheduleRun, createScheduleRun, updateScheduleRun, deleteScheduleRun } from '@/api/schedule-run'
+import { getAllScheduleRun, createScheduleRun, updateScheduleRun, deleteScheduleRun, enableScheduleRun, disableScheduleRun } from '@/api/schedule-run'
+import { getAllEmails } from '@/api/email'
+import { getSchedules } from '@/api/schedule'
+import { getAllTemplates } from '@/api/template'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -142,16 +172,6 @@ export default {
   name: 'ComplexTable',
   components: { Pagination },
   directives: { waves },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
       list: null,
@@ -162,29 +182,34 @@ export default {
         size: 10,
         search: undefined
       },
+      emails: [],
+      schedules: [],
+      templates: [],
       temp: {
         id: null,
-        name: '',
-        host: '',
-        port: '',
-        username: '',
-        password: ''
+        email: null,
+        emailTos: null,
+        scheduleId: null,
+        templateId: null
       },
       dialogFormVisible: false,
       dialogStatus: '',
       dialogPvVisible: false,
       rules: {
-        name: [{ required: true, message: this.$t('scheduleRun.validate.name'), trigger: 'blur' }],
-        host: [{ required: true, message: this.$t('scheduleRun.validate.host'), trigger: 'blur' }],
-        port: [{ required: true, message: this.$t('scheduleRun.validate.port'), trigger: 'blur' }],
-        username: [{ required: true, message: this.$t('scheduleRun.validate.username'), trigger: 'blur' }],
-        password: [{ required: true, message: this.$t('scheduleRun.validate.password'), trigger: 'blur' }]
+        email: [{ required: true, message: this.$t('scheduleRun.validate.email'), trigger: 'blur' }],
+        emailTos: [{ required: true, message: this.$t('scheduleRun.validate.emailTos'), trigger: 'blur' }],
+        scheduleCronjobId: [{ required: true, message: this.$t('scheduleRun.validate.scheduleCronjobId'), trigger: 'blur' }],
+        scheduleId: [{ required: true, message: this.$t('scheduleRun.validate.scheduleId'), trigger: 'blur' }],
+        templateId: [{ required: true, message: this.$t('scheduleRun.validate.templateId'), trigger: 'blur' }]
       },
       downloadLoading: false
     }
   },
   created() {
     this.getList()
+    this.getEmails()
+    this.getSchedules()
+    this.getTemplates()
   },
   methods: {
     async getList() {
@@ -200,6 +225,30 @@ export default {
         this.listLoading = false
       }
     },
+    async getEmails() {
+      try {
+        const response = await getAllEmails()
+        this.emails = response.data
+      } catch (error) {
+        this.$message.error(error)
+      }
+    },
+    async getSchedules() {
+      try {
+        const response = await getSchedules()
+        this.schedules = response.data
+      } catch (error) {
+        this.$message.error(error)
+      }
+    },
+    async getTemplates() {
+      try {
+        const response = await getAllTemplates()
+        this.templates = response.data
+      } catch (error) {
+        this.$message.error(error)
+      }
+    },
     handleFilter() {
       this.listQuery.page = 1
       this.getList()
@@ -207,11 +256,10 @@ export default {
     resetTemp() {
       this.temp = {
         id: null,
-        name: '',
-        host: '',
-        port: '',
-        username: '',
-        password: ''
+        email: null,
+        emailTos: null,
+        scheduleId: null,
+        templateId: null
       }
     },
     handleCreate() {
@@ -237,7 +285,13 @@ export default {
       })
     },
     handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
+      this.temp = {
+        id: row.id,
+        email: row.email.email,
+        emailTos: row.emailTos,
+        scheduleId: row.schedule.id,
+        templateId: row.template.id
+      }
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -268,6 +322,32 @@ export default {
       }).then(async() => {
         await deleteScheduleRun(row.id)
         await this.getList()
+        this.$message.success({
+          message: this.$t('message.success'),
+          type: 'success',
+          showClose: true
+        })
+      }).catch(() => {
+      })
+    },
+    handleModifyStatus(row) {
+      this.$confirm(this.$t('scheduleRun.message.modifyStatus'), this.$t('message.confirm'), {
+        confirmButtonText: this.$t('button.confirm'),
+        cancelButtonText: this.$t('button.cancel'),
+        type: 'warning'
+      }).then(async() => {
+        const enabled = row.enable
+        if (enabled) {
+          await disableScheduleRun(row.id)
+        } else {
+          await enableScheduleRun(row.id)
+        }
+        await this.getList()
+        this.$message.success({
+          message: this.$t('message.success'),
+          type: 'success',
+          showClose: true
+        })
       }).catch(() => {
       })
     },

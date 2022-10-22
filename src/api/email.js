@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function getAllEmails() {
+  return request({
+    url: '/emails/',
+    method: 'get'
+  })
+}
+
 export function getEmails(query) {
   return request({
     url: '/emails',

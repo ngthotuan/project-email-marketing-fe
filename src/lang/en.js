@@ -118,8 +118,15 @@ export default {
     'proxy': 'Proxy',
     'schedule': 'Schedule',
     'template': 'Template',
-    'enable': 'Enable',
-    'actions': 'Actions'
+    'enable': 'Status',
+    'status': {
+      'false': 'Off',
+      'true': 'On'
+    },
+    'actions': 'Actions',
+    'message': {
+      'modifyStatus': 'Do you want to change status?'
+    }
   },
   'button': {
     'close': 'Close',
