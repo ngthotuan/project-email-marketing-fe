@@ -14,3 +14,10 @@ export function updateSchedule(data) {
     data
   })
 }
+
+export function reschedule() {
+  return request({
+    url: '/reschedules/reschedule',
+    method: 'put'
+  })
+}

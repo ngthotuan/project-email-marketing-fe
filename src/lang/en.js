@@ -45,7 +45,8 @@ export default {
     'validate': {
       'name': 'Please input schedule name',
       'cron': 'Please select schedule cron'
-    }
+    },
+    'reload': 'Reload all data'
   },
   'email': {
     'title': 'Email',
@@ -125,7 +126,8 @@ export default {
     },
     'actions': 'Actions',
     'message': {
-      'modifyStatus': 'Do you want to change status?'
+      'modifyStatus': 'Do you want to change status?',
+      'delete': 'Do you want to delete this schedule run?'
     }
   },
   'button': {

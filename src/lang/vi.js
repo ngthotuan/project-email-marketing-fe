@@ -45,7 +45,8 @@ export default {
     'validate': {
       'name': 'Vui lòng nhập tên cho lịch trình',
       'cron': 'Vui lòng chọn cú pháp lịch trình'
-    }
+    },
+    'reload': 'Làm mới toàn bộ dữ liệu'
   },
   'email': {
     'title': 'Email',
@@ -125,7 +126,8 @@ export default {
     },
     'actions': 'Hành động',
     'message': {
-      'modifyStatus': 'Bạn có thật sự muốn thay đổi trạng thái?'
+      'modifyStatus': 'Bạn có thật sự muốn thay đổi trạng thái?',
+      'delete': 'Bạn có chắc chắn muốn xóa lịch trình chạy này?'
     }
   },
   'button': {
