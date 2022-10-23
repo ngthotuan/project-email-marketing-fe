@@ -289,10 +289,6 @@ export default {
       })
     },
     handleDelete(row, index) {
-      console.log({
-        row,
-        index
-      })
       this.$confirm(this.$t('email.message.delete'), this.$t('message.confirm'), {
         confirmButtonText: this.$t('button.confirm'),
         cancelButtonText: this.$t('button.cancel'),
@@ -300,6 +296,11 @@ export default {
       }).then(async() => {
         await deleteEmail(row.email)
         await this.getList()
+        this.$message.success({
+          message: this.$t('message.success'),
+          type: 'success',
+          showClose: true
+        })
       }).catch(() => {
       })
     },

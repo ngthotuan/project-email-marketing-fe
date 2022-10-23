@@ -263,6 +263,11 @@ export default {
       }).then(async() => {
         await deleteProxy(row.id)
         await this.getList()
+        this.$message.success({
+          message: this.$t('message.success'),
+          type: 'success',
+          showClose: true
+        })
       }).catch(() => {
       })
     },
