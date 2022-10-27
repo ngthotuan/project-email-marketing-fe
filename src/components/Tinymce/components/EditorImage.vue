@@ -13,7 +13,7 @@
         :before-upload="beforeUpload"
         class="editor-slide-upload"
         accept="image/*"
-        action="https://httpbin.org/post"
+        :action="`${uploadURL}/upload/blog`"
         list-type="picture-card"
       >
         <el-button size="small" type="primary">
@@ -45,7 +45,9 @@ export default {
     return {
       dialogVisible: false,
       listObj: {},
-      fileList: []
+      fileList: [],
+      // TODO: fix hardcode
+      uploadURL: 'https://nguyenthotuan.tech'
     }
   },
   methods: {
@@ -68,7 +70,7 @@ export default {
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {
-          this.listObj[objKeyArr[i]].url = response.files.file
+          this.listObj[objKeyArr[i]].url = this.uploadURL + response.location
           this.listObj[objKeyArr[i]].hasSuccess = true
           return
         }
