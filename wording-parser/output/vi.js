@@ -141,15 +141,20 @@ export default {
         "search": "Tìm kiếm",
         "export": "Xuất file"
     },
-    "dialog": {
-        "create": "Tạo mới",
-        "update": "Cập nhật"
-    },
-    "message": {
-        "success": "Thành công",
-        "fail": "Thất bại",
-        "error": "Lỗi",
-        "confirm": "Xác nhận",
-        "cancel": "Hủy bỏ"
-    }
+  "dialog": {
+    "create": "Tạo mới",
+    "update": "Cập nhật"
+  },
+  "message": {
+    "success": "Thành công",
+    "fail": "Thất bại",
+    "error": "Lỗi",
+    "confirm": "Xác nhận",
+    "cancel": "Hủy bỏ"
+  },
+  "upload": {
+    "button": "Tải ảnh lên",
+    "clickUpload": "Nhấn vào để chọn file",
+    "uploading": "Vui lòng đợi cho tất cả ảnh được tải lên, nếu còn lỗi tải lại trang nhé!"
+  }
 }

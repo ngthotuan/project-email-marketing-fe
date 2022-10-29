@@ -151,5 +151,10 @@ export default {
     'error': 'Error',
     'confirm': 'Confirm',
     'cancel': 'Cancel'
+  },
+  'upload': {
+    'button': 'Upload image',
+    'clickUpload': 'Click to select file',
+    'uploading': 'Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!'
   }
 }

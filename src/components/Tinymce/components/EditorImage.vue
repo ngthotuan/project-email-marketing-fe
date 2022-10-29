@@ -1,7 +1,7 @@
 <template>
   <div class="upload-container">
     <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">
-      upload
+      {{ $t('upload.button') }}
     </el-button>
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
@@ -17,14 +17,14 @@
         list-type="picture-card"
       >
         <el-button size="small" type="primary">
-          Click upload
+          {{ $t('upload.clickUpload') }}
         </el-button>
       </el-upload>
       <el-button @click="dialogVisible = false">
-        Cancel
+        {{ $t('button.cancel') }}
       </el-button>
       <el-button type="primary" @click="handleSubmit">
-        Confirm
+        {{ $t('button.confirm') }}
       </el-button>
     </el-dialog>
   </div>
@@ -59,7 +59,10 @@ export default {
     handleSubmit() {
       const arr = Object.keys(this.listObj).map(v => this.listObj[v])
       if (!this.checkAllSuccess()) {
-        this.$message('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
+        this.$message({
+          type: 'error',
+          message: this.$t('upload.uploading')
+        })
         return
       }
       this.$emit('successCBK', arr)
@@ -72,7 +75,7 @@ export default {
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {
-          this.listObj[objKeyArr[i]].url = response.files?.file || response.url || this.uploadURL + response.location
+          this.listObj[objKeyArr[i]].url = response.files?.file || response.data.url
           this.listObj[objKeyArr[i]].hasSuccess = true
           return
         }
