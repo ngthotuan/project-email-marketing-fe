@@ -444,8 +444,7 @@ export default {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           await updateScheduleRun(tempData)
-          const index = this.list.findIndex(v => v.id === this.temp.id)
-          this.list.splice(index, 1, this.temp)
+          await this.getList()
           this.dialogFormVisible = false
           this.$message.success({
             message: this.$t('message.success'),
