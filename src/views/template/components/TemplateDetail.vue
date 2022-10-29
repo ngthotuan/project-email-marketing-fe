@@ -23,7 +23,7 @@
           <el-input v-model="postForm.subject" />
         </el-form-item>
         <el-form-item prop="content" style="margin-bottom: 30px;">
-          <Tinymce ref="editor" v-model="postForm.content" :height="400" />
+          <Tinymce ref="editor" v-model="postForm.content" :height="400" :upload-u-r-l="uploadURL" />
         </el-form-item>
       </div>
     </el-form>
@@ -33,7 +33,7 @@
 <script>
 import Tinymce from '@/components/Tinymce'
 import Sticky from '@/components/Sticky'
-import { getTemplate, createTemplate, updateTemplate } from '@/api/template'
+import { createTemplate, getTemplate, updateTemplate } from '@/api/template'
 
 const defaultForm = {
   name: '',
@@ -52,6 +52,7 @@ export default {
   },
   data() {
     return {
+      uploadURL: process.env.VUE_APP_UPLOAD_FILE_URL || 'https://httpbin.org/post',
       postForm: Object.assign({}, defaultForm),
       loading: false,
       rules: {
