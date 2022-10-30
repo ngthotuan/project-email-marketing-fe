@@ -45,6 +45,11 @@
           <span>{{ $index + 1 }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('email.emailName')" align="center" min-width="150">
+        <template slot-scope="{row}">
+          <span class="link-type" @click="handleUpdate(row)">{{ row.emailName }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('email.email')" align="center" min-width="150">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.email }}</span>
@@ -86,9 +91,12 @@
         :rules="rules"
         :model="temp"
         label-position="left"
-        label-width="100px"
+        label-width="150px"
         style="margin-left:50px;"
       >
+        <el-form-item :label="$t('email.emailName')" prop="emailName">
+          <el-input v-model="temp.emailName" />
+        </el-form-item>
         <el-form-item :label="$t('email.email')" prop="email">
           <el-input v-model="temp.email" />
         </el-form-item>
@@ -153,7 +161,7 @@
 </template>
 
 <script>
-import { getEmails, createEmail, updateEmail, deleteEmail } from '@/api/email'
+import { createEmail, deleteEmail, getEmails, updateEmail } from '@/api/email'
 import { getAllProxies } from '@/api/proxy'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
@@ -185,6 +193,7 @@ export default {
       },
       listProxies: [],
       temp: {
+        emailName: '',
         email: '',
         password: '',
         proxyId: null
@@ -194,6 +203,9 @@ export default {
       dialogStatus: '',
       dialogPvVisible: false,
       rules: {
+        emailName: [
+          { required: true, message: this.$t('email.validate.emailName'), trigger: 'blur' }
+        ],
         email: [{ required: true, message: this.$t('email.validate.username'), trigger: 'blur' }, {
           type: 'email',
           message: this.$t('email.validate.username'),
@@ -234,8 +246,10 @@ export default {
     },
     resetTemp() {
       this.temp = {
-        username: '',
-        password: ''
+        emailName: '',
+        email: '',
+        password: '',
+        proxyId: null
       }
     },
     handleCreate() {
@@ -314,7 +328,7 @@ export default {
           'proxy'
         ]
         const tHeader = this.getTHeader(tb, headerKey)
-        const data = this.getTableData(['email', 'password', 'proxyId'])
+        const data = this.getTableData(['emailName', 'email', 'password', 'proxyId'])
         excel.export_json_to_excel({
           header: tHeader,
           data,

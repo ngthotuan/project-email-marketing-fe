@@ -50,7 +50,8 @@ export default {
   },
   'email': {
     'title': 'Email',
-    'search': 'Nhập email để tìm kiếm',
+    'search': 'Nhập email hoặc tên người gửi để tìm kiếm',
+    'emailName': 'Tên người gửi',
     'email': 'Email',
     'password': 'Mật khẩu',
     'no': 'STT',
@@ -58,7 +59,8 @@ export default {
     'validate': {
       'username': 'Vui lòng nhập đúng định dạng email',
       'password': 'Vui lòng nhập mật khẩu',
-      'proxy': 'Vui lòng chọn proxy'
+      'proxy': 'Vui lòng chọn proxy',
+      'emailName': 'Vui lòng nhập tên người gửi'
     },
     'message': {
       'delete': 'Bạn có chắc chắn muốn xóa email?'
@@ -112,7 +114,7 @@ export default {
   },
   'scheduleRun': {
     'title': 'Lịch trình chạy',
-    'search': 'Nhập email hoặc tên bản mẫu để tìm kiếm',
+    'search': 'Nhập email hoặc tên người gửi hoặc tên bản mẫu hoặc tên lịch trình để tìm kiếm',
     'id': 'Mã',
     'email': 'Email',
     'emailTos': 'Gửi tới',

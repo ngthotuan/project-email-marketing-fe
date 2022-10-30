@@ -50,7 +50,8 @@ export default {
   },
   'email': {
     'title': 'Email',
-    'search': 'Enter the email address to search',
+    'search': 'Enter the email address or sender name to search',
+    'emailName': 'Sender name',
     'email': 'Email',
     'password': 'Password',
     'no': 'No.',
@@ -58,7 +59,8 @@ export default {
     'validate': {
       'username': 'Please input correct email',
       'password': 'Please input password',
-      'proxy': 'Please select proxy'
+      'proxy': 'Please select proxy',
+      'emailName': 'Please input sender name'
     },
     'message': {
       'delete': 'Do you want to delete email?'
@@ -112,7 +114,7 @@ export default {
   },
   'scheduleRun': {
     'title': 'Schedule Run',
-    'search': 'Input email or template name to search',
+    'search': 'Input email or sender name or template or schedule name to search',
     'id': 'ID',
     'email': 'Email',
     'emailTos': 'To',

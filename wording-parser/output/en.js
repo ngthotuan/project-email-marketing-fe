@@ -49,17 +49,19 @@ export default {
         "reload": "Reload all data"
     },
     "email": {
-        "title": "Email",
-        "search": "Enter the email address to search",
-        "email": "Email",
-        "password": "Password",
-        "no": "No.",
-        "actions": "Actions",
-        "validate": {
-            "username": "Please input correct email",
-            "password": "Please input password",
-            "proxy": "Please select proxy"
-        },
+      "title": "Email",
+      "search": "Enter the email address or sender name to search",
+      "emailName": "Sender name",
+      "email": "Email",
+      "password": "Password",
+      "no": "No.",
+      "actions": "Actions",
+      "validate": {
+        "username": "Please input correct email",
+        "password": "Please input password",
+        "proxy": "Please select proxy",
+        "emailName": "Please input sender name"
+      },
         "message": {
             "delete": "Do you want to delete email?"
         },
@@ -111,18 +113,18 @@ export default {
         }
     },
     "scheduleRun": {
-        "title": "Schedule Run",
-        "search": "Input email or template name to search",
-        "id": "ID",
-        "email": "Email",
-        "emailTos": "To",
-        "proxy": "Proxy",
-        "schedule": "Schedule",
-        "template": "Template",
-        "enable": "Status",
-        "status": {
-            "false": "Off",
-            "true": "On"
+      "title": "Schedule Run",
+      "search": "Input email or sender name or template or schedule name to search",
+      "id": "ID",
+      "email": "Email",
+      "emailTos": "To",
+      "proxy": "Proxy",
+      "schedule": "Schedule",
+      "template": "Template",
+      "enable": "Status",
+      "status": {
+        "false": "Off",
+        "true": "On"
         },
         "actions": "Actions",
         "message": {
@@ -131,15 +133,15 @@ export default {
         }
     },
     "button": {
-        "close": "Close",
-        "add": "Add",
-        "update": "Update",
-        "edit": "Edit",
-        "delete": "Delete",
-        "cancel": "Cancel",
-        "confirm": "Confirm",
-        "search": "Search",
-        "export": "Export"
+      "close": "Close",
+      "add": "Add",
+      "update": "Update",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "search": "Search",
+      "export": "Export"
     },
   "dialog": {
     "create": "Create",

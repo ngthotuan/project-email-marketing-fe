@@ -164,10 +164,13 @@
       <el-form
         :model="temp"
         label-position="left"
-        label-width="100px"
+        label-width="150px"
         style="margin-left:50px;"
         disabled
       >
+        <el-form-item :label="$t('email.emailName')" prop="emailName">
+          <el-input v-model="temp.emailName" />
+        </el-form-item>
         <el-form-item :label="$t('email.email')" prop="email">
           <el-input v-model="temp.email" />
         </el-form-item>

@@ -49,17 +49,19 @@ export default {
         "reload": "Làm mới toàn bộ dữ liệu"
     },
     "email": {
-        "title": "Email",
-        "search": "Nhập email để tìm kiếm",
-        "email": "Email",
-        "password": "Mật khẩu",
-        "no": "STT",
-        "actions": "Hành động",
-        "validate": {
-            "username": "Vui lòng nhập đúng định dạng email",
-            "password": "Vui lòng nhập mật khẩu",
-            "proxy": "Vui lòng chọn proxy"
-        },
+      "title": "Email",
+      "search": "Nhập email hoặc tên người gửi để tìm kiếm",
+      "emailName": "Tên người gửi",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "no": "STT",
+      "actions": "Hành động",
+      "validate": {
+        "username": "Vui lòng nhập đúng định dạng email",
+        "password": "Vui lòng nhập mật khẩu",
+        "proxy": "Vui lòng chọn proxy",
+        "emailName": "Vui lòng nhập tên người gửi"
+      },
         "message": {
             "delete": "Bạn có chắc chắn muốn xóa email?"
         },
@@ -111,18 +113,18 @@ export default {
         }
     },
     "scheduleRun": {
-        "title": "Lịch trình chạy",
-        "search": "Nhập email hoặc tên bản mẫu để tìm kiếm",
-        "id": "Mã",
-        "email": "Email",
-        "emailTos": "Gửi tới",
-        "proxy": "Proxy",
-        "schedule": "Lịch trình",
-        "template": "Bản mẫu",
-        "enable": "Trạng thái",
-        "status": {
-            "false": "Tắt",
-            "true": "Bật"
+      "title": "Lịch trình chạy",
+      "search": "Nhập email hoặc tên người gửi hoặc tên bản mẫu hoặc tên lịch trình để tìm kiếm",
+      "id": "Mã",
+      "email": "Email",
+      "emailTos": "Gửi tới",
+      "proxy": "Proxy",
+      "schedule": "Lịch trình",
+      "template": "Bản mẫu",
+      "enable": "Trạng thái",
+      "status": {
+        "false": "Tắt",
+        "true": "Bật"
         },
         "actions": "Hành động",
         "message": {
@@ -131,15 +133,15 @@ export default {
         }
     },
     "button": {
-        "close": "Đóng",
-        "add": "Tạo mới",
-        "update": "Cập nhật",
-        "edit": "Sửa",
-        "delete": "Xóa",
-        "cancel": "Hủy bỏ",
-        "confirm": "Xác nhận",
-        "search": "Tìm kiếm",
-        "export": "Xuất file"
+      "close": "Đóng",
+      "add": "Tạo mới",
+      "update": "Cập nhật",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "cancel": "Hủy bỏ",
+      "confirm": "Xác nhận",
+      "search": "Tìm kiếm",
+      "export": "Xuất file"
     },
   "dialog": {
     "create": "Tạo mới",
