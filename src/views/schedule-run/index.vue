@@ -20,9 +20,6 @@
       >
         {{ $t('button.add') }}
       </el-button>
-      <el-button class="filter-item" icon="el-icon-refresh" type="success" @click="handleReload">
-        {{ $t('schedule.reload') }}
-      </el-button>
       <!--      <el-button-->
       <!--        v-waves-->
       <!--        :loading="downloadLoading"-->
@@ -278,7 +275,7 @@ import {
   updateScheduleRun
 } from '@/api/schedule-run'
 import { getAllEmails } from '@/api/email'
-import { getSchedules, reschedule } from '@/api/schedule'
+import { getSchedules } from '@/api/schedule'
 import { getAllTemplates } from '@/api/template'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
@@ -528,15 +525,6 @@ export default {
           return v[j]
         }
       }))
-    },
-    handleReload() {
-      reschedule().then(() => {
-        this.$message.success({
-          message: this.$t('message.success'),
-          type: 'success',
-          showClose: true
-        })
-      })
     }
   }
 }

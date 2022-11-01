@@ -1,11 +1,5 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-button class="filter-item" type="success" icon="el-icon-refresh" @click="handleReload">
-        {{ $t('schedule.reload') }}
-      </el-button>
-    </div>
-
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -77,7 +71,7 @@
 </style>
 
 <script>
-import { getSchedules, updateSchedule, reschedule } from '@/api/schedule'
+import { getSchedules, reschedule, updateSchedule } from '@/api/schedule'
 import VueCronEditorBuefy from 'vue-cron-editor-buefy'
 import waves from '@/directive/waves' // waves directive
 
