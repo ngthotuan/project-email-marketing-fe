@@ -57,7 +57,7 @@
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.proxy')" min-width="120" align="center">
         <template slot-scope="{row}">
-          <span class="link-type" @click="showProxy(row)">{{ row.proxy.name }}</span>
+          <span class="link-type" @click="showProxy(row)">{{ row.proxy ? row.proxy.name : "" }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('scheduleRun.schedule')" min-width="150" align="center">
