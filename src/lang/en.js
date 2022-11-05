@@ -110,6 +110,13 @@ export default {
     },
     'message': {
       'delete': 'Do you want to delete this template?'
+    },
+    'attachment': {
+      'title': 'Attachments',
+      'no': 'No',
+      'name': 'File name',
+      'actions': 'Actions',
+      'delete': 'Do you want to delete this attachment?'
     }
   },
   'scheduleRun': {

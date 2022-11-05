@@ -25,6 +25,48 @@
         <el-form-item prop="content" style="margin-bottom: 30px;">
           <Tinymce ref="editor" v-model="postForm.content" :height="400" :upload-u-r-l="uploadURL" />
         </el-form-item>
+        <el-form-item :label="$t('template.attachment.title')">
+          <div>
+            <input ref="file-upload" class="file-upload" type="file" @change="handleClick">
+            <div class="drop" @dragenter="handleDragover" @dragover="handleDragover" @drop="handleDrop">
+              <el-button :loading="loading" size="mini" style="margin-left:16px;" type="primary" @click="handleUpload">
+                {{ $t('upload.clickUpload') }}
+              </el-button>
+            </div>
+            <el-table
+              v-loading="loading"
+              :data="listFile"
+              border
+              fit
+              highlight-current-row
+              style="margin-top: 10px; width: 100%;"
+            >
+              <el-table-column :label="$t('template.attachment.no')" align="center" width="200">
+                <template slot-scope="{ $index}">
+                  <span>{{ $index + 1 }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('template.attachment.name')" align="center" min-width="150">
+                <template slot-scope="{row}">
+                  <span v-if="row.isNew">{{ row.originName }}</span>
+                  <a v-else :href="row.url" class="link-type" target="_blank">{{ row.originName }}</a>
+                </template>
+              </el-table-column>
+              <el-table-column
+                :label="$t('template.attachment.actions')"
+                align="center"
+                class-name="small-padding fixed-width"
+                width="250"
+              >
+                <template slot-scope="{row,$index}">
+                  <el-button size="mini" type="danger" @click="handleDeleteFile(row, $index)">
+                    {{ $t('button.delete') }}
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-form-item>
       </div>
     </el-form>
   </div>
@@ -33,7 +75,7 @@
 <script>
 import Tinymce from '@/components/Tinymce'
 import Sticky from '@/components/Sticky'
-import { createTemplate, getTemplate, updateTemplate } from '@/api/template'
+import { addTemplateFile, createTemplate, deleteTemplateFile, getTemplate, updateTemplate } from '@/api/template'
 
 const defaultForm = {
   name: '',
@@ -60,7 +102,8 @@ export default {
         subject: [{ required: true, message: this.$t('template.validate.subject'), trigger: 'blur' }],
         content: [{ required: true, message: this.$t('template.validate.content'), trigger: 'blur' }]
       },
-      tempRoute: {}
+      tempRoute: {},
+      listFile: [] // attachments
     }
   },
   created() {
@@ -77,7 +120,9 @@ export default {
   methods: {
     fetchData(id) {
       getTemplate(id).then(response => {
-        this.postForm = response.data
+        const { files, ...data } = response.data
+        this.postForm = data
+        this.listFile = files || []
         // set tagsview title
         this.setTagsViewTitle()
         // set page title
@@ -106,7 +151,14 @@ export default {
       this.$refs['postForm'].validate(async(valid) => {
         if (valid) {
           this.loading = true
-          await createTemplate(this.postForm)
+          // lấy file ra và upload lên server
+          const files = this.listFile.filter(item => item.isNew)
+          const formData = new FormData()
+          formData.append('data', JSON.stringify(this.postForm))
+          files.forEach(file => {
+            formData.append('files', file.rawFile)
+          })
+          await createTemplate(formData)
           this.$message.success({
             message: this.$t('message.success'),
             type: 'success',
@@ -129,6 +181,99 @@ export default {
           })
           this.loading = false
         }
+      })
+    },
+    handleDrop(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      if (this.loading) return
+      const files = e.dataTransfer.files
+      if (files.length !== 1) {
+        this.$message.error('Only support uploading one file!')
+        return
+      }
+      const rawFile = files[0] // only use files[0]
+      this.upload(rawFile)
+      e.stopPropagation()
+      e.preventDefault()
+    },
+    handleDragover(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+    },
+    handleUpload() {
+      this.$refs['file-upload'].click()
+    },
+    handleClick(e) {
+      const files = e.target.files
+      const rawFile = files[0] // only use files[0]
+      if (!rawFile) return
+      this.upload(rawFile)
+    },
+    async upload(rawFile) {
+      this.loading = true
+      if (!this.isEdit) {
+        // new thì chỉ cần lưu vào listFile
+        this.listFile.push({
+          isNew: true,
+          originName: rawFile.name,
+          rawFile
+        })
+        this.loading = false
+        return
+      }
+      // edit thì upload file lên server và cập nhật vào listFile
+      try {
+        const formData = new FormData()
+        formData.append('file', rawFile)
+        const { data } = await addTemplateFile(this.postForm.id, formData)
+        this.listFile.push(data)
+        this.$message.success({
+          message: this.$t('message.success'),
+          type: 'success',
+          showClose: true
+        })
+      } catch (err) {
+        this.$message.error({
+          message: this.$t('message.error'),
+          type: 'error',
+          showClose: true
+        })
+        console.log(err)
+      } finally {
+        this.loading = false
+      }
+    },
+    handleDeleteFile(row, index) {
+      this.$confirm(this.$t('template.attachment.delete'), this.$t('message.confirm'), {
+        confirmButtonText: this.$t('button.confirm'),
+        cancelButtonText: this.$t('button.cancel'),
+        type: 'warning'
+      }).then(async() => {
+        if (this.isEdit) {
+          // edit thì xóa file trên server
+          try {
+            await deleteTemplateFile(this.postForm.id, row.name)
+            this.listFile.splice(index, 1)
+            this.$message.success({
+              message: this.$t('message.success'),
+              type: 'success',
+              showClose: true
+            })
+          } catch (err) {
+            this.$message.error({
+              message: this.$t('message.error'),
+              type: 'error',
+              showClose: true
+            })
+            console.log(err)
+          }
+        } else {
+          // new thì xóa file trong listFile
+          this.listFile.splice(index, 1)
+        }
+      }).catch(() => {
       })
     }
   }
@@ -161,5 +306,23 @@ export default {
     border-radius: 0px;
     border-bottom: 1px solid #bfcbd9;
   }
+}
+
+.file-upload {
+  display: none;
+  z-index: -9999;
+}
+
+.drop {
+  border: 2px dashed #bbb;
+  width: 600px;
+  height: 160px;
+  line-height: 160px;
+  margin: 0 auto;
+  font-size: 24px;
+  border-radius: 5px;
+  text-align: center;
+  color: #bbb;
+  position: relative;
 }
 </style>

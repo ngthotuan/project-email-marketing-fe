@@ -26,6 +26,9 @@ export function createTemplate(data) {
   return request({
     url: '/templates/template',
     method: 'post',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    },
     data
   })
 }
@@ -41,6 +44,24 @@ export function updateTemplate(data) {
 export function deleteTemplate(template) {
   return request({
     url: `/templates/${template}`,
+    method: 'delete'
+  })
+}
+
+export function addTemplateFile(templateId, data) {
+  return request({
+    url: `/templates/${templateId}/file`,
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    },
+    data
+  })
+}
+
+export function deleteTemplateFile(templateId, fileName) {
+  return request({
+    url: `/templates/${templateId}/file/${fileName}`,
     method: 'delete'
   })
 }

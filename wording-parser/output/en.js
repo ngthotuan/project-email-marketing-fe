@@ -62,16 +62,16 @@ export default {
         "proxy": "Please select proxy",
         "emailName": "Please input sender name"
       },
-        "message": {
-            "delete": "Do you want to delete email?"
-        },
-        "proxyId": "ID",
-        "proxyName": "Name",
-        "proxyHost": "Host",
-        "proxyPort": "Port",
-        "proxyUsername": "Username",
-        "proxyPassword": "Password",
-        "proxy": "Proxy",
+      "message": {
+        "delete": "Do you want to delete email?"
+      },
+      "proxyId": "ID",
+      "proxyName": "Name",
+      "proxyHost": "Host",
+      "proxyPort": "Port",
+      "proxyUsername": "Username",
+      "proxyPassword": "Password",
+      "proxy": "Proxy",
         "proxyInfo": "Proxy Info"
     },
     "proxy": {
@@ -100,17 +100,24 @@ export default {
         "search": "Input name or subject to search",
         "id": "ID",
         "name": "Name",
-        "subject": "Subject",
-        "content": "Content",
+      "subject": "Subject",
+      "content": "Content",
+      "actions": "Actions",
+      "validate": {
+        "name": "Please input template name",
+        "subject": "Please input template subject",
+        "content": "Please input template content"
+      },
+      "message": {
+        "delete": "Do you want to delete this template?"
+      },
+      "attachment": {
+        "title": "Attachments",
+        "no": "No",
+        "name": "File name",
         "actions": "Actions",
-        "validate": {
-            "name": "Please input template name",
-            "subject": "Please input template subject",
-            "content": "Please input template content"
-        },
-        "message": {
-            "delete": "Do you want to delete this template?"
-        }
+        "delete": "Do you want to delete this attachment?"
+      }
     },
     "scheduleRun": {
       "title": "Schedule Run",
@@ -125,12 +132,12 @@ export default {
       "status": {
         "false": "Off",
         "true": "On"
-        },
-        "actions": "Actions",
-        "message": {
-            "modifyStatus": "Do you want to change status?",
-            "delete": "Do you want to delete this schedule run?"
-        }
+      },
+      "actions": "Actions",
+      "message": {
+        "modifyStatus": "Do you want to change status?",
+        "delete": "Do you want to delete this schedule run?"
+      }
     },
     "button": {
       "close": "Close",

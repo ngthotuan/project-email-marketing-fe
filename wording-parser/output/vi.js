@@ -62,16 +62,16 @@ export default {
         "proxy": "Vui lòng chọn proxy",
         "emailName": "Vui lòng nhập tên người gửi"
       },
-        "message": {
-            "delete": "Bạn có chắc chắn muốn xóa email?"
-        },
-        "proxyId": "Mã",
-        "proxyName": "Tên",
-        "proxyHost": "Máy chủ",
-        "proxyPort": "Cổng",
-        "proxyUsername": "Tài khoản",
-        "proxyPassword": "Mật khẩu",
-        "proxy": "Proxy",
+      "message": {
+        "delete": "Bạn có chắc chắn muốn xóa email?"
+      },
+      "proxyId": "Mã",
+      "proxyName": "Tên",
+      "proxyHost": "Máy chủ",
+      "proxyPort": "Cổng",
+      "proxyUsername": "Tài khoản",
+      "proxyPassword": "Mật khẩu",
+      "proxy": "Proxy",
         "proxyInfo": "Thông tin Proxy"
     },
     "proxy": {
@@ -100,17 +100,24 @@ export default {
         "search": "Nhập tên hoặc chủ đề để tìm kiếm",
         "id": "Mã",
         "name": "Tên",
-        "subject": "Chủ đề",
-        "content": "Nội dung",
+      "subject": "Chủ đề",
+      "content": "Nội dung",
+      "actions": "Hành động",
+      "validate": {
+        "name": "Vui lòng nhập tên của bản mẫu",
+        "subject": "Vui lòng nhập chủ đề của bản mẫu",
+        "content": "Vui lòng nhập nội dung của bản mẫu"
+      },
+      "message": {
+        "delete": "Bạn có chắc chắn muốn xóa bản mẫu này?"
+      },
+      "attachment": {
+        "title": "Tệp đính kèm",
+        "no": "STT",
+        "name": "Tên file",
         "actions": "Hành động",
-        "validate": {
-            "name": "Vui lòng nhập tên của bản mẫu",
-            "subject": "Vui lòng nhập chủ đề của bản mẫu",
-            "content": "Vui lòng nhập nội dung của bản mẫu"
-        },
-        "message": {
-            "delete": "Bạn có chắc chắn muốn xóa bản mẫu này?"
-        }
+        "delete": "Bạn có chắc chắn muốn xóa tệp đính kèm này?"
+      }
     },
     "scheduleRun": {
       "title": "Lịch trình chạy",
@@ -125,12 +132,12 @@ export default {
       "status": {
         "false": "Tắt",
         "true": "Bật"
-        },
-        "actions": "Hành động",
-        "message": {
-            "modifyStatus": "Bạn có thật sự muốn thay đổi trạng thái?",
-            "delete": "Bạn có chắc chắn muốn xóa lịch trình chạy này?"
-        }
+      },
+      "actions": "Hành động",
+      "message": {
+        "modifyStatus": "Bạn có thật sự muốn thay đổi trạng thái?",
+        "delete": "Bạn có chắc chắn muốn xóa lịch trình chạy này?"
+      }
     },
     "button": {
       "close": "Đóng",

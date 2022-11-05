@@ -110,6 +110,13 @@ export default {
     },
     'message': {
       'delete': 'Bạn có chắc chắn muốn xóa bản mẫu này?'
+    },
+    'attachment': {
+      'title': 'Tệp đính kèm',
+      'no': 'STT',
+      'name': 'Tên file',
+      'actions': 'Hành động',
+      'delete': 'Bạn có chắc chắn muốn xóa tệp đính kèm này?'
     }
   },
   'scheduleRun': {
