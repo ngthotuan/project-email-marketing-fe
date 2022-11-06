@@ -242,7 +242,7 @@
       <el-form
         :model="temp"
         label-position="left"
-        label-width="100px"
+        label-width="150px"
         style="margin-left:50px;"
         disabled
       >
@@ -254,6 +254,11 @@
         </el-form-item>
         <el-form-item :label="$t('template.content')" prop="content">
           <el-input v-html="temp.content" />
+        </el-form-item>
+        <el-form-item :label="$t('template.attachment.title')" prop="files">
+          <a v-for="item in temp.files" :key="item.id" :href="item.url" class="link-type" target="_blank">
+            {{ item.originName }}
+          </a>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
