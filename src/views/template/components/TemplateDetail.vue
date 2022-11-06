@@ -228,7 +228,7 @@ export default {
         const formData = new FormData()
         formData.append('file', rawFile)
         const { data } = await addTemplateFile(this.postForm.id, formData)
-        this.listFile.push(data)
+        this.listFile = data.files
         this.$message.success({
           message: this.$t('message.success'),
           type: 'success',
