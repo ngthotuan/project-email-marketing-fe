@@ -73,6 +73,9 @@
               {{ $t('button.edit') }}
             </el-button>
           </router-link>
+          <el-button size="mini" type="warning" @click="previewTemplate(row,$index)">
+            {{ $t('button.view') }}
+          </el-button>
           <el-button size="mini" type="danger" @click="handleDelete(row,$index)">
             {{ $t('button.delete') }}
           </el-button>
@@ -87,11 +90,41 @@
       :limit.sync="listQuery.size"
       @pagination="getList"
     />
+
+    <el-dialog :title="$t('scheduleRun.template')" :visible.sync="dialogTemplateVisible">
+      <el-form
+        :model="temp"
+        disabled
+        label-position="left"
+        label-width="150px"
+        style="margin-left:50px;"
+      >
+        <el-form-item :label="$t('template.name')" prop="name">
+          <el-input v-model="temp.name" />
+        </el-form-item>
+        <el-form-item :label="$t('template.subject')" prop="subject">
+          <el-input v-model="temp.subject" />
+        </el-form-item>
+        <el-form-item :label="$t('template.content')" prop="content">
+          <el-input style="width: 100%" v-html="temp.content" />
+        </el-form-item>
+        <el-form-item :label="$t('template.attachment.title')" prop="files">
+          <a v-for="item in temp.files" :key="item.id" :href="item.url" class="link-type" target="_blank">
+            {{ item.originName }}
+          </a>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogTemplateVisible = false">
+          {{ $t('button.close') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getTemplates, deleteTemplate } from '@/api/template'
+import { deleteTemplate, getTemplates } from '@/api/template'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -110,7 +143,9 @@ export default {
         size: 10,
         search: undefined
       },
-      downloadLoading: false
+      downloadLoading: false,
+      dialogTemplateVisible: false,
+      temp: {}
     }
   },
   created() {
@@ -144,6 +179,10 @@ export default {
         await this.getList()
       }).catch(() => {
       })
+    },
+    previewTemplate(row, index) {
+      this.temp = row
+      this.dialogTemplateVisible = true
     },
     handleDownload() {
       this.downloadLoading = true
