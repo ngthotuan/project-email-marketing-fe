@@ -21,7 +21,11 @@ export default {
         "title": "Login Form",
         "logIn": "Login",
         "username": "Username",
-        "password": "Password"
+        "password": "Password",
+        "validate": {
+            "username": "Please input username",
+            "password": "Please input pasword"
+        }
     },
     "tagsView": {
         "refresh": "Refresh",
@@ -49,29 +53,29 @@ export default {
         "reload": "Reload all data"
     },
     "email": {
-      "title": "Email",
-      "search": "Enter the email address or sender name to search",
-      "emailName": "Sender name",
-      "email": "Email",
-      "password": "Password",
-      "no": "No.",
-      "actions": "Actions",
-      "validate": {
-        "username": "Please input correct email",
-        "password": "Please input password",
-        "proxy": "Please select proxy",
-        "emailName": "Please input sender name"
-      },
-      "message": {
-        "delete": "Do you want to delete email?"
-      },
-      "proxyId": "ID",
-      "proxyName": "Name",
-      "proxyHost": "Host",
-      "proxyPort": "Port",
-      "proxyUsername": "Username",
-      "proxyPassword": "Password",
-      "proxy": "Proxy",
+        "title": "Email",
+        "search": "Enter the email address or sender name to search",
+        "emailName": "Sender name",
+        "email": "Email",
+        "password": "Password",
+        "no": "No.",
+        "actions": "Actions",
+        "validate": {
+            "username": "Please input correct email",
+            "password": "Please input password",
+            "proxy": "Please select proxy",
+            "emailName": "Please input sender name"
+        },
+        "message": {
+            "delete": "Do you want to delete email?"
+        },
+        "proxyId": "ID",
+        "proxyName": "Name",
+        "proxyHost": "Host",
+        "proxyPort": "Port",
+        "proxyUsername": "Username",
+        "proxyPassword": "Password",
+        "proxy": "Proxy",
         "proxyInfo": "Proxy Info"
     },
     "proxy": {
@@ -100,70 +104,71 @@ export default {
         "search": "Input name or subject to search",
         "id": "ID",
         "name": "Name",
-      "subject": "Subject",
-      "content": "Content",
-      "actions": "Actions",
-      "validate": {
-        "name": "Please input template name",
-        "subject": "Please input template subject",
-        "content": "Please input template content"
-      },
-      "message": {
-        "delete": "Do you want to delete this template?"
-      },
-      "attachment": {
-        "title": "Attachments",
-        "no": "No",
-        "name": "File name",
+        "subject": "Subject",
+        "content": "Content",
         "actions": "Actions",
-        "delete": "Do you want to delete this attachment?"
-      }
+        "validate": {
+            "name": "Please input template name",
+            "subject": "Please input template subject",
+            "content": "Please input template content"
+        },
+        "message": {
+            "delete": "Do you want to delete this template?"
+        },
+        "attachment": {
+            "title": "Attachments",
+            "no": "No",
+            "name": "File name",
+            "actions": "Actions",
+            "delete": "Do you want to delete this attachment?"
+        }
     },
     "scheduleRun": {
-      "title": "Schedule Run",
-      "search": "Input email or sender name or template or schedule name to search",
-      "id": "ID",
-      "email": "Email",
-      "emailTos": "To",
-      "proxy": "Proxy",
-      "schedule": "Schedule",
-      "template": "Template",
-      "enable": "Status",
-      "status": {
-        "false": "Off",
-        "true": "On"
-      },
-      "actions": "Actions",
-      "message": {
-        "modifyStatus": "Do you want to change status?",
-        "delete": "Do you want to delete this schedule run?"
-      }
+        "title": "Schedule Run",
+        "search": "Input email or sender name or template or schedule name to search",
+        "id": "ID",
+        "email": "Email",
+        "emailTos": "To",
+        "proxy": "Proxy",
+        "schedule": "Schedule",
+        "template": "Template",
+        "enable": "Status",
+        "status": {
+            "false": "Off",
+            "true": "On"
+        },
+        "actions": "Actions",
+        "message": {
+            "modifyStatus": "Do you want to change status?",
+            "delete": "Do you want to delete this schedule run?"
+        }
     },
     "button": {
-      "close": "Close",
-      "add": "Add",
-      "update": "Update",
-      "edit": "Edit",
-      "delete": "Delete",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "search": "Search",
-      "export": "Export"
+        "close": "Close",
+        "add": "Add",
+        "update": "Update",
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "search": "Search",
+        "export": "Export",
+        "view": "View"
     },
-  "dialog": {
-    "create": "Create",
-    "update": "Update"
-  },
-  "message": {
-    "success": "Success",
-    "fail": "Fail",
-    "error": "Error",
-    "confirm": "Confirm",
-    "cancel": "Cancel"
-  },
-  "upload": {
-    "button": "Upload image",
-    "clickUpload": "Click to select file",
-    "uploading": "Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!"
-  }
+    "dialog": {
+        "create": "Create",
+        "update": "Update"
+    },
+    "message": {
+        "success": "Success",
+        "fail": "Fail",
+        "error": "Error",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+    },
+    "upload": {
+        "button": "Upload image",
+        "clickUpload": "Click to select file",
+        "uploading": "Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!"
+    }
 }

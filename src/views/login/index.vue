@@ -68,8 +68,8 @@ export default {
         password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: 'Please enter username' }],
-        password: [{ required: true, trigger: 'blur', message: 'Please enter password' }]
+        username: [{ required: true, trigger: 'blur', message: this.$t('login.validate.username') }],
+        password: [{ required: true, trigger: 'blur', message: this.$t('login.validate.password') }]
       },
       passwordType: 'password',
       capsTooltip: false,

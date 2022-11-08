@@ -21,7 +21,11 @@ export default {
     'title': 'Login Form',
     'logIn': 'Login',
     'username': 'Username',
-    'password': 'Password'
+    'password': 'Password',
+    'validate': {
+      'username': 'Please input username',
+      'password': 'Please input pasword'
+    }
   },
   'tagsView': {
     'refresh': 'Refresh',
@@ -148,7 +152,8 @@ export default {
     'cancel': 'Cancel',
     'confirm': 'Confirm',
     'search': 'Search',
-    'export': 'Export'
+    'export': 'Export',
+    'view': 'View'
   },
   'dialog': {
     'create': 'Create',

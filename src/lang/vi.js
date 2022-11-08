@@ -21,7 +21,11 @@ export default {
     'title': 'Đăng nhập hệ thống',
     'logIn': 'Đăng nhập',
     'username': 'Tài khoản',
-    'password': 'Mật khẩu'
+    'password': 'Mật khẩu',
+    'validate': {
+      'username': 'Vui lòng nhập tài khoản',
+      'password': 'Vui lòng nhập mật khẩu'
+    }
   },
   'tagsView': {
     'refresh': 'Làm mới',
@@ -148,7 +152,8 @@ export default {
     'cancel': 'Hủy bỏ',
     'confirm': 'Xác nhận',
     'search': 'Tìm kiếm',
-    'export': 'Xuất file'
+    'export': 'Xuất file',
+    'view': 'Xem'
   },
   'dialog': {
     'create': 'Tạo mới',

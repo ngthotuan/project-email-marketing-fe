@@ -73,7 +73,7 @@
               {{ $t('button.edit') }}
             </el-button>
           </router-link>
-          <el-button size="mini" type="warning" @click="previewTemplate(row,$index)">
+          <el-button size="mini" type="warning" style="margin-left: 5px" @click="previewTemplate(row,$index)">
             {{ $t('button.view') }}
           </el-button>
           <el-button size="mini" type="danger" @click="handleDelete(row,$index)">
